@@ -1,0 +1,16 @@
+:root {
+
+    --font-size: 16px;
+    --primary-color: #0A7EE8;
+    --primary-color-600: #0758a2;
+    --secondary-color: #06BFEA;
+    --secondary-color-600: #0486a4;
+    --dark-color: #1D1D1D;
+    --bg-color: #131313;
+    --bg-color-100: #242424;
+    --text-color: #EEEEEE;
+
+    @media only screen and (max-width:1320px){
+        --font-size: 14px;
+    }
+}
