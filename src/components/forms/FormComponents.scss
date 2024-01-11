@@ -1,0 +1,269 @@
+.r_input_field{
+    position: relative;
+    display: block;
+    width: 100%;
+
+    &>label{
+        position: relative;
+        display: block;
+        margin: 0;
+        font-size: 0.9rem;
+        margin-bottom: 0.25em;
+        padding-inline: 1rem;
+        opacity: 0.75;
+    }
+
+    input:not([type]),
+    input[type='text']:not(.browser-default),
+    input[type='password']:not(.browser-default),
+    input[type='email']:not(.browser-default),
+    input[type='url']:not(.browser-default),
+    input[type='time']:not(.browser-default),
+    input[type='date']:not(.browser-default),
+    input[type='datetime']:not(.browser-default),
+    input[type='datetime-local']:not(.browser-default),
+    input[type='tel']:not(.browser-default),
+    input[type='number']:not(.browser-default),
+    input[type='search']:not(.browser-default),
+    textarea{
+        position: relative;
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        border: none;
+        outline: none;
+        background-color: var(--bg-color-100);
+        padding: 0;
+        margin: 0;
+        height: 3.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        border-radius: 0.75rem;
+        padding-inline: 1rem;
+        transition: all 0.3s ease;
+
+        &:focus{
+            box-shadow: 0px 0px 1px 1px var(--primary-color);
+        }
+
+    }
+
+    textarea{
+        height: auto;
+        min-height: 6rem;
+        padding-bottom: 1rem;
+    }
+
+    .radio_group {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 2rem;
+        width: 100%;
+        
+        .radio_{
+            position: relative;
+            display: block;
+            width: auto;
+            flex: 1;
+            height: 3.5rem;
+            border-radius: 0.75rem;
+            overflow: hidden;
+
+            span{
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+                background-color: var(--bg-color-100);
+                transition: all 0.3s ease;
+            }
+
+            input[type=radio]{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                z-index: 3;
+                cursor: pointer;
+
+                &:checked{
+                    &+span{
+                        background-color: var(--primary-color);
+                    }
+                }
+            }
+        }
+        
+    }
+
+    .r_checkbox{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+
+        input[type=checkbox]{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 4;
+            cursor: pointer;
+            margin: 0;
+            padding: 0;
+
+            &:checked{
+                &+span{
+                    background-color: var(--primary-color);
+
+                    svg{
+                        transform: none;
+                    }
+                }
+            }
+        }
+
+        &>span{
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 0.25rem;
+            background-color: var(--bg-color-100);
+            border: none;
+            outline: none;
+            transition: all 0.3s ease;
+            color: var(--text-color);
+            font-size: 0.9rem;
+
+            svg{
+                transform: scale(0);
+                transition: all 0.3s ease;
+            }
+        }
+
+        p{
+            position: relative;
+            display: block;
+            font-size: 1rem;
+            
+        }
+    }
+
+
+    .react-datepicker-wrapper {
+        width: 100%;
+    }
+}
+
+.r_select{
+
+
+    .r_select_pre{
+        &__control{
+            border: none;
+            min-height: 3.5rem;
+            max-height: 3.5rem;
+            border-radius: 0.75rem;
+            background-color: var(--bg-color-100);
+            color: var(--text-color);
+
+            &--is-focused{
+                .r_select_pre__placeholder{
+                    display: none;
+                }
+            }
+        }
+
+        &__value-container {
+            padding: 0 1rem;
+            height: 3.5rem;
+        }
+
+        &__indicator-separator {
+            display: none;
+        }
+
+        &__indicator-container {
+            padding: 0 1rem;
+        }
+        
+        &__input-container {
+            grid-area: 1;
+            padding: 0;
+            margin: 0;
+        }
+
+        &__input{
+
+            color: var(--text-color) !important;
+            font-size: 1rem !important;
+            font-weight: 500;
+            padding: 0 !important;
+            margin: 0 !important;
+            box-shadow: none !important;
+        }
+
+        &__placeholder {
+            grid-area: 1;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        &__single-value {
+            grid-area: 1;
+            color: var(--text-color);
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0;
+            margin: 0;
+        }
+
+        &__menu{
+            background-color: var(--bg-color-100);
+            border-radius: 0.75rem;
+            padding: 0;
+        }
+
+        &__menu-list{
+            padding: 0;
+        }
+
+        &__option{
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            padding: 1em;
+            &--is-focused{
+                background-color: var(--primary-color);
+            }
+        }
+        
+        
+    }
+
+    .css-5kkxb2-requiredInput-RequiredInput{
+        position: absolute;
+    }
+
+
+    input[type=text]:not(.browser-default){
+        box-shadow: none;
+        grid-area: 1;
+        width: 100%;
+    }
+
+
+}

@@ -1,4 +1,5 @@
 import RMain from '@/components/common/RMain';
+import Footer from '@/components/footer/Footer';
 import Header from '@/components/header/Header';
 import '@/styles/app.scss';
 import { DM_Sans } from 'next/font/google'
@@ -18,6 +19,8 @@ export default function RootLayout({ children }) {
           <Header />
           
           <RMain>{children}</RMain>
+
+          <Footer />
 
       </body>
     </html>

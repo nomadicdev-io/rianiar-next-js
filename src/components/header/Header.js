@@ -21,7 +21,7 @@ const NavLogo = ()=> {
     return (
         <div className='nav_logo'>
             <Link href={'/'} className='nav_logo_link'>
-                <Image src={'/logo.svg'} width={120} height={120}/>
+                <Image src={'/logo.svg'} width={120} height={120} alt='logo'/>
             </Link>
         </div>
     )

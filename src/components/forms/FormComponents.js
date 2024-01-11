@@ -1,0 +1,90 @@
+import Select from 'react-select';
+import './FormComponents.scss';
+import { useId } from 'react';
+import { FaCheck } from "react-icons/fa6";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+export const RInput = ({title, type, controller, cssClass})=> {
+    const id = useId();
+    return (
+        <div className={`r_input_field ${cssClass}`}>
+            <label htmlFor={id} >{title}</label>
+            <input type={type} {...controller} id={id}/>
+        </div>
+    )
+}
+
+export const RRadio = ({title, type, controller, cssClass, data})=> {
+    return (
+        <div className={`r_input_field ${cssClass}`}>
+            <label>{title}</label>
+            <div className='radio_group'>
+
+                {
+                    data?.map((e, i)=> (
+                        <div className='radio_' key={`genderID${i}`}>
+                            <input type={type} name={title} value={e.value} {...controller}/>
+                            <span>{e.name}</span>
+                        </div>
+                    ))
+                }
+
+            </div>
+        </div>
+    )
+}
+
+export const RSelect = ({title, controller, cssClass, data, placeholder})=> {
+
+    const id = useId();
+
+    return (
+        <div className={`r_input_field ${cssClass}`}>
+            <label htmlFor={id} >{title}</label>
+            <Select
+                options={data}
+                className="r_select"
+                placeholder={placeholder}
+                classNamePrefix={'r_select_pre'}
+                {...controller}
+                id={id}
+            />
+        </div>
+    )
+}
+
+export const RCheckbox = ({children, cssClass, controller})=> {
+    const id = useId();
+    return (
+        <div className={`r_input_field ${cssClass}`}>
+            <div className='r_checkbox'>
+                <input type='checkbox' id={id} {...controller}/>
+                <span><FaCheck /></span>
+                <label htmlFor={id}>{children}</label>
+            </div>
+        </div>
+    )
+}
+
+export const RDatepicker = ({title, controller, cssClass})=> {
+
+    const id = useId();
+
+    return (
+        <div className={`r_input_field ${cssClass}`}>
+            <label htmlFor={id} >{title}</label>
+            <DatePicker />
+        </div>
+    )
+}
+
+export const RTextArea = ({title, type, controller, cssClass})=> {
+    const id = useId();
+    return (
+        <div className={`r_input_field ${cssClass}`}>
+            <label htmlFor={id} >{title}</label>
+            <textarea type={type} {...controller} id={id}/>
+        </div>
+    )
+}

@@ -9,6 +9,7 @@
     height: 2.85rem;
     border-radius: calc(2.85rem / 2);
     transition: all 0.3s ease;
+    padding: 0;
 
     span{
         position: relative;
@@ -87,4 +88,38 @@
             background-color: var(--secondary-color-600);
         }
     }
+}
+
+.btn_group{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    &.center_{
+        justify-content: center;
+    }
+
+    &.end_{
+        justify-content: flex-end;
+    }
+
+    &.between_{
+        justify-content: space-between;
+    }
+
+    &.mt_1{
+        margin-top: 1rem;
+    }
+
+    &.mt_2{
+        margin-top: 2rem;
+    }
+
+    &.mt_3{
+        margin-top: 3rem;
+    }
+
 }

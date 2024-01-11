@@ -1,0 +1,41 @@
+.registration_wrapper{
+    position: relative;
+    display: block;
+    width: 100%;
+    min-width: 55%;
+    max-width: 55%;
+    margin-inline: auto;
+
+    @media only screen and (max-width: 767px){
+        min-width: 100%;
+        max-width: 100%;
+    }
+}
+
+.register_form_grid{
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    width: 100%;
+
+    .half_{
+        grid-column: span 2;
+    }
+
+    .full_{
+        grid-column: 1/-1;
+    }
+
+    @media only screen and (max-width: 767px){
+       grid-template-columns: 1fr;
+
+       .half_{
+            grid-column: 1/-1;
+        }
+
+        .full_{
+            grid-column: 1/-1;
+        }
+    }
+}

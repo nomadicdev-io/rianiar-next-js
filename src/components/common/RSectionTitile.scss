@@ -1,0 +1,35 @@
+.section_title{
+    position: relative;
+    display: block;
+
+    h4{
+        position: relative;
+        display: block;
+        margin: 0;
+        font-weight: 400;
+        text-transform: uppercase;
+        color: var(--primary-color);
+        font-size: 1.1rem;
+        letter-spacing: 0.15em;
+    }
+
+    h2{
+        position: relative;
+        display: block;
+        margin: 0;
+        font-size: 5rem;
+        margin: 0;
+        line-height: 1.25;
+        span{
+            color: var(--primary-color);
+        }
+
+        @media only screen and (max-width: 767px){
+            font-size: 3.5rem;
+        }
+    }
+
+    &.have_margin_bottom{
+        margin-bottom: 2.5rem;
+    }
+}
