@@ -37,6 +37,11 @@ const SubscribeNewsletter = ()=> {
 const Footer = () => {
   return (
     <footer className='r_footer'>
+
+        <div className='footer_bg'>
+            <Image src={'/footer-bg.svg'} width={1920} height={720} alt='RianAir'/>
+        </div>
+
         <RContainer>
             <div className='footer_logo'>
                 <Link href={'/'} title='RianAir'>
@@ -92,6 +97,8 @@ const Footer = () => {
         <RContainer>
             <p className='footer_copyright'>&copy; RianAir {new Date().getFullYear()}. All rights reserved | Powered by <a href='#'>nomadicdev.io</a></p>
         </RContainer>
+
+        
     </footer>
   )
 }

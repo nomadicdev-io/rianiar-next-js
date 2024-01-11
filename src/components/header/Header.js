@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 import { RAButton, RAIconButton } from '../buttons/Buttons';
 import { FaRegPaperPlane } from "react-icons/fa6";
 import { LuUser } from "react-icons/lu";
+import { useEffect, useState } from 'react';
 
 const NavWrapper = ({children})=> {
     return (
@@ -95,8 +96,30 @@ const NavListing = ()=> {
 }
 
 const Header = () => {
+
+    const [isScrolling, setIsScrolling] = useState(null);
+    const [isScrolled, setIsScrolled] = useState(null)
+
+    const scrollHandler = ()=> {
+
+        window.scrollY > 5 ? setIsScrolling(true) & setIsScrolled(true) : setIsScrolling(false) & setIsScrolled(false)
+        let scrollValue = window.scrollY;
+
+        window.addEventListener('scroll', event=> {
+
+            window.scrollY > 5 ? setIsScrolled(true) : setIsScrolled(false)
+            window.scrollY > scrollValue ? setIsScrolling(true) : setIsScrolling(false)
+    
+            scrollValue = window.scrollY;
+        })
+    }
+
+    useEffect(()=> {
+        scrollHandler();
+    }, [])
+
   return (
-    <header>
+    <header className={`${isScrolling ? 'hide_' : ''} ${isScrolled ? 'scrolled_' : ''}`}>
         <RContainer>
 
             <NavWrapper>

@@ -68,6 +68,14 @@ const RRegistrationForm = () => {
                 controller={{...register("last_name", { required: true, maxLength: 20 })}}
             />
 
+            <RRadio 
+                title={'Gender'}
+                cssClass={'full_'}
+                type={'radio'}
+                data={[{name: 'Male', value: 'male'}, {name: 'Female', value: 'female'}, {name: 'Others', value: 'others'}]}
+                controller={{...register("gender", { required: true })}}
+            /> 
+
             <Controller
                 name="country"
                 control={control}
@@ -125,16 +133,6 @@ const RRegistrationForm = () => {
                 type={'text'}
                 controller={{...register("hobbies", { required: true, maxLength: 13 })}}
             />
-
-            <RRadio 
-                title={'Gender'}
-                cssClass={'full_'}
-                type={'radio'}
-                data={[{name: 'Male', value: 'male'}, {name: 'Female', value: 'female'}, {name: 'Others', value: 'others'}]}
-                controller={{...register("gender", { required: true })}}
-            /> 
-
-            
 
             <Controller
                 name="qualification"

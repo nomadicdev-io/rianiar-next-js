@@ -5,6 +5,7 @@ header{
     width: 100%;
     height: auto;
     z-index: 99;
+    transition: all 0.3s ease;
 
     .nav_wrapper{
         position: relative;
@@ -12,6 +13,7 @@ header{
         align-items: center;
         justify-content: space-between;
         padding-block: 1.5rem;
+        transition: all 0.3s ease;
     }
 
     .nav_logo{
@@ -85,5 +87,23 @@ header{
         align-items: center;
         gap: 1rem;
         flex-wrap: wrap;
+    }
+
+    &.scrolled_{
+        background-color: var(--bg-color);
+
+        .nav_wrapper{
+            padding-block: 1rem;
+        }
+
+        .nav_logo {
+            .nav_logo_link{
+                height: 2.75rem;
+            }
+        }
+    }
+
+    &.hide_{
+        transform: translateY(-100%);
     }
 }
