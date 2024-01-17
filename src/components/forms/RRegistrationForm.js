@@ -38,9 +38,23 @@ const RRegistrationForm = () => {
 
     const getAllCountries = async ()=> {
         try{
-            const res = await fetch('https://restcountries.com/v2/all');
+            const headers = new Headers();
+            headers.append("X-CSCAPI-KEY", process.env.NEXT_PUBLIC_COUNTRY_API_KEY);
+
+            const requestOptions = {
+                method: 'GET',
+                headers: headers,
+                redirect: 'follow'
+             };
+
+            const res = await fetch("https://api.countrystatecity.in/v1/countries", requestOptions)
             const data = await res.json();
-            console.log(data)
+            const countryArray = data.map(item=> {
+                return {label: item.name, value: item.name}
+            })
+
+            setCountries(countryArray)
+
         }catch(error){
             console.log(error)
         }
@@ -76,37 +90,46 @@ const RRegistrationForm = () => {
                 controller={{...register("gender", { required: true })}}
             /> 
 
-            <Controller
-                name="country"
-                control={control}
-                render={({ field }) => (
-                    <RSelect 
-                        title={'Country'}
-                        cssClass={'half_'}
-                        placeholder={'Choose Country'}
-                        required={true}
-                        controller={{...field}}
-                        data={options}
+            {
+                countries && (
+                    <>
+                    <Controller
+                        name="country"
+                        control={control}
+                        render={({ field }) => (
+                            <RSelect 
+                                title={'Country'}
+                                cssClass={'half_'}
+                                placeholder={'Choose Country'}
+                                required={true}
+                                controller={{...field}}
+                                data={countries}
+                                onValueChanged={(el)=> console.log(el)}
+                            />
+        
+                        )}
                     />
-
-                )}
-            />
-
-            <Controller
-                name="state"
-                control={control}
-                render={({ field }) => (
-                    <RSelect 
-                        title={'State'}
-                        cssClass={'half_'}
-                        placeholder={'Choose State'}
-                        required={true}
-                        controller={{...field}}
-                        data={options}
+        
+                    <Controller
+                        name="state"
+                        control={control}
+                        render={({ field }) => (
+                            <RSelect 
+                                title={'State'}
+                                cssClass={'half_'}
+                                placeholder={'Choose State'}
+                                required={true}
+                                controller={{...field}}
+                                data={states}
+                            />
+        
+                        )}
                     />
+                    </>
+                )
+            }
 
-                )}
-            />
+           
 
             <RInput 
                 title={'Email'}
@@ -119,19 +142,28 @@ const RRegistrationForm = () => {
                 title={'Phone'}
                 cssClass={'half_'}
                 type={'number'}
-                controller={{...register("phone_number", { required: true, maxLength: 13 })}}
-            />
-
-            <RDatepicker 
-                title={'Date of Birth'}
-                cssClass={'half_'}
+                controller={{...register("dob", { required: true})}}
             />
 
             <RInput 
-                title={'Hobbies'}
+                title={'Address'}
                 cssClass={'half_'}
                 type={'text'}
-                controller={{...register("hobbies", { required: true, maxLength: 13 })}}
+                controller={{...register("address", { required: true, maxLength: 13 })}}
+            />
+
+            <Controller
+                name="dob"
+                control={control}
+                render={({ field }) => (
+                    <RDatepicker 
+                        title={'Date of Birth'}
+                        cssClass={'half_'}
+                        required={true}
+                        controller={{...field}}
+                    />
+
+                )}
             />
 
             <Controller

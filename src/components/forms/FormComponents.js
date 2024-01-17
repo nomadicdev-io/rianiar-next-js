@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import Select from 'react-select';
 import './FormComponents.scss';
 import { useId } from 'react';
 import { FaCheck } from "react-icons/fa6";
 import DatePicker from "react-datepicker";
+import { LuCalendarDays } from "react-icons/lu";
 import "react-datepicker/dist/react-datepicker.css";
 
 export const RInput = ({title, type, controller, cssClass})=> {
@@ -35,9 +37,10 @@ export const RRadio = ({title, type, controller, cssClass, data})=> {
     )
 }
 
-export const RSelect = ({title, controller, cssClass, data, placeholder})=> {
+export const RSelect = ({title, controller, cssClass, data, placeholder, onValueChanged})=> {
 
     const id = useId();
+    const [selectedOption, setSelectedOption] = useState(null);
 
     return (
         <div className={`r_input_field ${cssClass}`}>
@@ -47,6 +50,9 @@ export const RSelect = ({title, controller, cssClass, data, placeholder})=> {
                 className="r_select"
                 placeholder={placeholder}
                 classNamePrefix={'r_select_pre'}
+                defaultValue={selectedOption}
+                onChange={setSelectedOption}
+                onInputChange={()=> console.log(selectedOption)}
                 {...controller}
                 id={id}
             />
@@ -71,10 +77,17 @@ export const RDatepicker = ({title, controller, cssClass})=> {
 
     const id = useId();
 
+    const [startDate, setStartDate] = useState(new Date());
+
     return (
         <div className={`r_input_field ${cssClass}`}>
             <label htmlFor={id} >{title}</label>
-            <DatePicker />
+            <div className='datepicker_'>
+                <DatePicker {...controller} selected={startDate} onChange={(date) => setStartDate(date)} />
+                <div className='icon_'>
+                    <LuCalendarDays />
+                </div>
+            </div>
         </div>
     )
 }
