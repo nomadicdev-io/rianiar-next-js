@@ -1,0 +1,173 @@
+.home_banner{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    min-height: 100dvh;
+
+    &:before{ 
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 20%;
+        background: linear-gradient(180deg, var(--bg-color) 0%, rgba(0, 0, 0, 0) 100%);
+        z-index: 9;
+        pointer-events: none;
+    }
+
+    &:after{ 
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 70%;
+        background: linear-gradient(0deg, var(--bg-color) 0%, rgba(0, 0, 0, 0) 100%);
+        z-index: 9;
+        pointer-events: none;
+    }
+
+    .banner_bg{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+        .banner_video{
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            opacity: 0.1;
+            filter: grayscale(1);
+
+            img{
+                position: relative;
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+
+        .overlay_{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            
+            img{
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+    }
+
+}
+
+.banner_content{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding-top: 12.5rem;
+    padding-bottom: 7.5rem;
+    z-index: 10;
+
+   
+
+    .content_{
+        position: relative;
+        text-align: center;
+        width: 100%;
+        max-width: 80%;
+        margin-inline: auto;
+
+        @media only screen and (max-width: 767px){
+            max-width: 92.5%;
+        }
+
+        .text_{
+            position: relative;
+            display: block;
+            width: 100%;
+
+            h2{
+                position: relative;
+                display: block;
+                margin: 0;
+                line-height: 1.2;
+                font-size: 3.5rem;
+
+                @media only screen and (max-width: 767px){
+                    font-size: 2.75rem;
+                }
+    
+                span{
+                    &:nth-of-type(1){
+                        color: var(--secondary-color);
+                    }
+                    &:nth-of-type(2){
+                        color: var(--primary-color);
+                    }
+                }
+            }
+    
+            p{
+                position: relative;
+                display: block;
+                margin: 2.5rem 0 0;
+                font-size: 1.5rem;
+                line-height: 2;
+                max-width: 85%;
+                margin-inline: auto;
+
+                @media only screen and (max-width: 767px){
+                    font-size: 1.2rem;
+                }
+
+                @media only screen and (max-width: 767px){
+                    max-width: 92.5%;
+                }
+            }
+        }
+
+       
+    }
+
+    .banner_disclaimer{
+        position: relative;
+        display: block;
+        width: 100%;
+        max-width: 75%;
+        padding: 1.5rem;
+        border-radius: 1rem;
+        background-color: var(--dark-color);
+        margin-top: 5rem;
+        margin-inline: auto;
+
+        @media only screen and (max-width: 767px){
+            max-width: 92.5%;
+        }
+
+        p{
+            position: relative;
+            display: block;
+            opacity: 0.5;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+    }
+}
+

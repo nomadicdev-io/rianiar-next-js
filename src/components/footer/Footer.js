@@ -8,6 +8,7 @@ import { FaRegPaperPlane } from "react-icons/fa6"
 import { useState } from 'react'
 import { FaWhatsapp, FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 
 const SubscribeNewsletter = ()=> {
 
@@ -51,30 +52,59 @@ const Footer = () => {
 
             <SubscribeNewsletter />
 
+            <div className='footer_contact'>
+                <ul>
+                    <li>
+                        <a href='tel:+917377877273' target='_blank' className='link_'>
+                            <div className='icon_'>
+                                <FaPhoneAlt />
+                            </div>
+                            <span>+91 73778 77273</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='tel:+917377577873' target='_blank' className='link_'>
+                            <div className='icon_'>
+                                <FaPhoneAlt />
+                            </div>
+                            <span>+91 73775 77873</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='mailto:info@rianair.in' target='_blank' className='link_'>
+                            <div className='icon_'>
+                                <FaEnvelope />
+                            </div>
+                            <span>info@rianair.in</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
             <div className='footer_links'>
                 <ul>
                     <li>
-                        <a href='#' className='icon_link'>
+                        <a href='#' className='icon_link' target='_blank'>
                             <FaWhatsapp />
                         </a>
                     </li>
                     <li>
-                        <a href='#' className='icon_link'>
+                        <a href='#' className='icon_link' target='_blank'>
                             <FaFacebookF />
                         </a>
                     </li>
                     <li>
-                        <a href='#' className='icon_link'>
+                        <a href='#' className='icon_link' target='_blank'>
                             <FaInstagram />
                         </a>
                     </li>
                     <li>
-                        <a href='#' className='icon_link'>
+                        <a href='#' className='icon_link' target='_blank'>
                             <FaLinkedinIn />
                         </a>
                     </li>
                     <li>
-                        <a href='#' className='icon_link'>
+                        <a href='#' className='icon_link' target='_blank'>
                             <FaXTwitter />
                         </a>
                     </li>

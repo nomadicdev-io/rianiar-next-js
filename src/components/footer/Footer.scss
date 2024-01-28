@@ -71,7 +71,7 @@
     overflow: hidden;
     margin-inline: auto;
     margin-top: 1.5rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
 
     @media only screen and (max-width: 767px){
         width: 95%;
@@ -191,5 +191,68 @@
         display: block;
         width: 100%;
         height: auto;
+    }
+}
+
+.footer_contact{
+    position: relative;
+    display: block;
+    margin-bottom: 2rem;
+
+    ul{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        width: 100%;
+        flex-wrap: wrap;
+
+        li{
+            display: block;
+        }
+    }
+
+    .link_{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        transition: all 0.3s ease;
+        background-color: var(--bg-color-100);
+        padding: 0.25rem;
+        border-radius: 1.5rem;
+        color: var(--text-color);
+        font-weight: 500;
+        font-size: 1rem;
+
+        span{
+            position: relative;
+            display: block;
+            padding: 0 1.25rem;
+        }
+
+        .icon_{
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            font-size: 0.95rem;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        &:hover{
+            background-color: var(--primary-color);
+            
+            .icon_{
+                background-color: var(--text-color);
+                color: var(--primary-color);
+            }
+        }
     }
 }

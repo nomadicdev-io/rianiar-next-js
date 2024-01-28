@@ -37,25 +37,32 @@ export const RRadio = ({title, type, controller, cssClass, data})=> {
     )
 }
 
-export const RSelect = ({title, controller, cssClass, data, placeholder, onValueChanged})=> {
+export const RSelect = ({title, controller, cssClass, data, placeholder, onValueChanged, isLoading})=> {
 
     const id = useId();
     const [selectedOption, setSelectedOption] = useState(null);
 
+    const selectChange = (el)=> {
+        console.log(el)
+    }
+
     return (
         <div className={`r_input_field ${cssClass}`}>
             <label htmlFor={id} >{title}</label>
-            <Select
-                options={data}
-                className="r_select"
-                placeholder={placeholder}
-                classNamePrefix={'r_select_pre'}
-                defaultValue={selectedOption}
-                onChange={setSelectedOption}
-                onInputChange={()=> console.log(selectedOption)}
-                {...controller}
-                id={id}
-            />
+            {
+                data ? (
+                    <Select
+                        options={data}
+                        className="r_select"
+                        placeholder={placeholder}
+                        classNamePrefix={'r_select_pre'}
+                        {...controller}
+                        onChange={el => onValueChanged ? onValueChanged(el) : null}
+                    />
+                ) : (
+                    <div className='placeholder_' />
+                )
+            }
         </div>
     )
 }

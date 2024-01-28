@@ -66,7 +66,7 @@ const NavListing = ()=> {
 
     return (
         <div className='nav_box'>
-            <div className='nav_items_box'>
+            {/* <div className='nav_items_box'>
                 <nav>
                     <ul>
                         {
@@ -76,7 +76,7 @@ const NavListing = ()=> {
                         }
                     </ul>
                 </nav>
-            </div>
+            </div> */}
 
             <div className='nav_action_box'>
                 <RAIconButton 

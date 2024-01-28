@@ -10,12 +10,13 @@
     border-radius: calc(2.85rem / 2);
     transition: all 0.3s ease;
     padding: 0;
+    font-weight: 600;
 
     span{
         position: relative;
         display: inline-block;
         font-size: 0.9rem;
-        padding-inline: 1.65em;
+        padding-inline: 1.5em 1.1em;
     }
 
     .icon_{
@@ -36,6 +37,25 @@
         background-color: var(--primary-color);
     }
 
+    &.whatsapp {
+        background-color: var(--whatsapp-color);
+    }
+
+    &.lg_{
+        height: 3.5rem;
+        border-radius: 1.75rem;
+
+        span{
+            font-size: 1.1rem;
+        }
+
+        .icon_{
+            width: 3.5rem;
+            height: 3.5rem;
+            font-size: 1.5rem;
+        }
+    }
+
     &:hover{
         .icon_{
             transform: scale(0.8);
@@ -43,6 +63,10 @@
 
         &.primary{
             background-color: var(--primary-color-600);
+        }
+
+        &.whatsapp{
+            background-color: var(--whatsapp-color-600);
         }
     }
 }

@@ -13,6 +13,15 @@ const RRegistrationForm = () => {
     const [countries, setCountries] = useState(null);
     const [states, setStates] = useState(null)
 
+    const headers = new Headers();
+    headers.append("X-CSCAPI-KEY", process.env.NEXT_PUBLIC_COUNTRY_API_KEY);
+
+    const requestOptions = {
+        method: 'GET',
+        headers: headers,
+        redirect: 'follow'
+    };
+
     const educationdata = [
         {label: 'Senior School ', value: 'Senior School '},
         {label: 'Graduate Diploma', value: 'Graduate Diploma'},
@@ -29,31 +38,36 @@ const RRegistrationForm = () => {
         {label: 'Cabin Crew', name: 'Cabin Crew'},
         {label: 'Aircraft Maintenance Engineer', name: 'Aircraft Maintenance Engineer'}
     ]
-    
-    const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' },
-    ];
 
     const getAllCountries = async ()=> {
         try{
-            const headers = new Headers();
-            headers.append("X-CSCAPI-KEY", process.env.NEXT_PUBLIC_COUNTRY_API_KEY);
-
-            const requestOptions = {
-                method: 'GET',
-                headers: headers,
-                redirect: 'follow'
-             };
-
             const res = await fetch("https://api.countrystatecity.in/v1/countries", requestOptions)
             const data = await res.json();
+
             const countryArray = data.map(item=> {
-                return {label: item.name, value: item.name}
+                return {label: item.name, value: item.name, iso2: item.iso2}
             })
 
             setCountries(countryArray)
+
+        }catch(error){
+            console.log(error)
+        }
+    }
+
+    const getAllStates = async (el)=> {
+        try{
+
+            setStates(null)
+
+            const res = await fetch(`https://api.countrystatecity.in/v1/countries/${el.iso2}/states`, requestOptions)
+            const data = await res.json();
+
+            const stateArray = data.map(item=> {
+                return {label: item.name, value: item.name, iso2: item.iso2}
+            })
+
+            setStates(stateArray)
 
         }catch(error){
             console.log(error)
@@ -90,46 +104,38 @@ const RRegistrationForm = () => {
                 controller={{...register("gender", { required: true })}}
             /> 
 
-            {
-                countries && (
-                    <>
-                    <Controller
-                        name="country"
-                        control={control}
-                        render={({ field }) => (
-                            <RSelect 
-                                title={'Country'}
-                                cssClass={'half_'}
-                                placeholder={'Choose Country'}
-                                required={true}
-                                controller={{...field}}
-                                data={countries}
-                                onValueChanged={(el)=> console.log(el)}
-                            />
-        
-                        )}
+            <Controller
+                name="country"
+                control={control}
+                render={({ field }) => (
+                    <RSelect 
+                        title={'Country'}
+                        cssClass={'half_'}
+                        placeholder={'Choose Country'}
+                        required={true}
+                        controller={{...field}}
+                        data={countries}
+                        onValueChanged={getAllStates}
                     />
-        
-                    <Controller
-                        name="state"
-                        control={control}
-                        render={({ field }) => (
-                            <RSelect 
-                                title={'State'}
-                                cssClass={'half_'}
-                                placeholder={'Choose State'}
-                                required={true}
-                                controller={{...field}}
-                                data={states}
-                            />
-        
-                        )}
-                    />
-                    </>
-                )
-            }
 
-           
+                )}
+            />
+
+            <Controller
+                name="state"
+                control={control}
+                render={({ field }) => (
+                    <RSelect 
+                        title={'State'}
+                        cssClass={'half_'}
+                        placeholder={'Choose State'}
+                        required={true}
+                        controller={{...field}}
+                        data={states}
+                    />
+
+                )}
+            />
 
             <RInput 
                 title={'Email'}
