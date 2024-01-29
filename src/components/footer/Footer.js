@@ -30,7 +30,6 @@ const SubscribeNewsletter = ()=> {
                     <FaRegPaperPlane />
                 </button>
             </form>
-
         </div>
     )
 }
