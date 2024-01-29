@@ -17,7 +17,7 @@ export const metadata = {
     siteName: 'RianAir',
     images: [
       {
-        url: '/r-og-image.jpg',
+        url: 'https://ciersten.sirv.com/rianiar/r-og-image.jpg',
         width: 800,
         height: 600,
       }
