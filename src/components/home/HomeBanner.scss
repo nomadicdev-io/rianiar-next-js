@@ -4,7 +4,11 @@
     width: 100%;
     height: auto;
     overflow: hidden;
-    min-height: 100dvh;
+    height: 100vh;
+
+    @media only screen and (max-width: 767px){
+        min-height: 100dvh;
+    }
 
     &:before{ 
         content: "";
@@ -47,7 +51,7 @@
             opacity: 0.1;
             filter: grayscale(1);
 
-            img{
+            img, video{
                 position: relative;
                 display: block;
                 width: 100%;
@@ -78,13 +82,12 @@
 
 .banner_content{
     position: relative;
-    display: block;
+    display: flex;
     width: 100%;
-    height: auto;
-    padding-top: 12.5rem;
-    padding-bottom: 7.5rem;
+    height: 100%;
     z-index: 10;
-
+    align-items: center;
+    justify-content: center;
    
 
     .content_{
@@ -98,44 +101,56 @@
             max-width: 92.5%;
         }
 
-        .text_{
+        .title_{
             position: relative;
             display: block;
             width: 100%;
 
+            h3{
+                position: relative;
+                display: block;
+                margin: 0;
+                font-size: 3rem;
+                font-weight: 600;
+
+                @media only screen and (max-width: 767px){
+                    font-size: 2rem;
+                }
+            }
+            
             h2{
                 position: relative;
                 display: block;
                 margin: 0;
-                line-height: 1.2;
-                font-size: 3.5rem;
+                line-height: 1.25;
+                font-size: 7.5rem;
+                color: var(--primary-color);
+                font-weight: 900;
+                background: -webkit-linear-gradient(360deg,var(--primary-color), var(--secondary-color));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
 
                 @media only screen and (max-width: 767px){
-                    font-size: 2.75rem;
+                    font-size: 6rem;
                 }
     
-                span{
-                    &:nth-of-type(1){
-                        color: var(--secondary-color);
-                    }
-                    &:nth-of-type(2){
-                        color: var(--primary-color);
-                    }
-                }
             }
     
+        }
+
+        .text_{
+            position: relative;
+            display: block;
+            width: 100%;
+            margin-top: 1.5rem;
             p{
                 position: relative;
                 display: block;
-                margin: 2.5rem 0 0;
-                font-size: 1.5rem;
+                font-size: 1.25rem;
                 line-height: 2;
-                max-width: 85%;
+                max-width: 65%;
+                margin-block: 0;
                 margin-inline: auto;
-
-                @media only screen and (max-width: 767px){
-                    font-size: 1.2rem;
-                }
 
                 @media only screen and (max-width: 767px){
                     max-width: 92.5%;

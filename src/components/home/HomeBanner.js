@@ -10,10 +10,16 @@ const BannerContent = ()=> {
 
             <div className='content_'>
 
-                <div className='text_'>
-                    <h2>Something <span>Big</span> is Coming in <span>2024</span></h2>
-                    <p>Unlocking the Future: RianAir is cooking up something extraordinary!  Get ready for a digital revolution that will redefine your pilot training experience.</p>
+                <div className='title_'>
+                    <h3>Something Big is</h3>
+                    <h2>Coming in 2024</h2>
                 </div>
+
+                
+                <div className='text_'>
+                <p>Unlocking the Future: RianAir is cooking up something extraordinary!  Get ready for a digital revolution that will redefine your pilot training experience.</p>
+                </div>
+                
 
                 <RButtonGroup cssClass={'mt_3 center_'}>
                     <RAButton 
@@ -24,15 +30,14 @@ const BannerContent = ()=> {
                     /> 
                     <RAButton 
                     title={'WhatsApp Us'}
-                    href={'/apply'}
+                    href={"https://wa.me/+917377877273?text=I'm%20RianAir"}
+                    target="__blank"
                     size={'lg_'}
                     theme={'whatsapp'}
                     icon={<FaWhatsapp />} 
                     /> 
-
-
                 </RButtonGroup>
-                
+
                
             </div>
 
@@ -49,9 +54,11 @@ const HomeBanner = () => {
   return (
     <section id='home-banner' className='home_banner'>
         <div className='banner_bg'>
-            {/* <div className='banner_video'>
-                <Image src={'/banner-image.jpg'} width={1920} height={1280} alt='pagebg'/>
-            </div> */}
+            <div className='banner_video'>
+                <video muted autoPlay playsInline loop>
+                    <source src='/banner-video.mp4'/>
+                </video>
+            </div> 
             <div className='overlay_'>
                 <Image src={'/pageBG.png'} width={1920} height={1280} alt='pagebg'/>
             </div>

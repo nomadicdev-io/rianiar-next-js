@@ -7,9 +7,9 @@ export const RButtonGroup = ({children, cssClass})=> {
     )
 }
 
-export const RAButton = ({title, theme, icon, href, size})=> {
+export const RAButton = ({title, theme, icon, href, size, target})=> {
     return (
-        <Link title={title} href={href} className={`btn_ ${theme ? theme : 'primary'} ${size ? size : ''}`}>
+        <Link title={title} href={href} className={`btn_ ${theme ? theme : 'primary'} ${size ? size : ''}`} target={target && target}>
             <span>{title}</span>
             {
                 icon && <div className='icon_'>{icon}</div>
@@ -29,9 +29,9 @@ export const RButton = ({title, theme, icon, size, type})=> {
     )
 }
 
-export const RAIconButton = ({title, theme, icon, href, size})=> {
+export const RAIconButton = ({title, theme, icon, href, size, target})=> {
     return (
-        <Link title={title} href={href} className={`btn_icon ${theme ? theme : 'primary'} ${size ? size : ''}`}>
+        <Link title={title} href={href} className={`btn_icon ${theme ? theme : 'primary'} ${size ? size : ''}`} target={target && target}>
             {icon}
         </Link>
     )

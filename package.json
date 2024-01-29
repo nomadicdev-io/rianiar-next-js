@@ -11,14 +11,12 @@
   "dependencies": {
     "jotai": "^2.6.1",
     "next": "14.0.4",
-    "next-video": "^0.12.0",
     "react": "^18",
     "react-datepicker": "^4.25.0",
     "react-dom": "^18",
     "react-hook-form": "^7.49.3",
     "react-icons": "^4.12.0",
     "react-select": "^5.8.0",
-    "sass": "^1.69.7",
-    "styled-components": "^6.1.8"
+    "sass": "^1.69.7"
   }
 }
