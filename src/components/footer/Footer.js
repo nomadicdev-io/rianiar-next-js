@@ -55,7 +55,7 @@ const Footer = () => {
             <div className='footer_contact'>
                 <ul>
                     <li>
-                        <a href='tel:+917377877273' target='_blank' className='link_'>
+                        <a href='tel:+917377877273' target='_blank' className='link_' title='RianAir | Phone'>
                             <div className='icon_'>
                                 <FaPhoneAlt />
                             </div>
@@ -63,7 +63,7 @@ const Footer = () => {
                         </a>
                     </li>
                     <li>
-                        <a href='tel:+917377577873' target='_blank' className='link_'>
+                        <a href='tel:+917377577873' target='_blank' className='link_' title='RianAir | Phone'>
                             <div className='icon_'>
                                 <FaPhoneAlt />
                             </div>
@@ -71,7 +71,7 @@ const Footer = () => {
                         </a>
                     </li>
                     <li>
-                        <a href='mailto:info@rianair.in' target='_blank' className='link_'>
+                        <a href='mailto:info@rianair.in' target='_blank' className='link_' title='RianAir | Email'>
                             <div className='icon_'>
                                 <FaEnvelope />
                             </div>
@@ -84,27 +84,27 @@ const Footer = () => {
             <div className='footer_links'>
                 <ul>
                     <li>
-                        <a href='#' className='icon_link' target='_blank'>
+                        <a href={"https://wa.me/+917377877273?text=I'm%20RianAir"} className='icon_link' target='_blank' title='RianAir | WhatsApp'>
                             <FaWhatsapp />
                         </a>
                     </li>
                     <li>
-                        <a href='#' className='icon_link' target='_blank'>
+                        <a href='https://www.facebook.com/Rian.aviation/' className='icon_link' target='_blank' title='RianAir | Facebook'>
                             <FaFacebookF />
                         </a>
                     </li>
                     <li>
-                        <a href='#' className='icon_link' target='_blank'>
+                        <a href='https://www.instagram.com/rian_air/' className='icon_link' target='_blank' title='RianAir | Instagram'>
                             <FaInstagram />
                         </a>
                     </li>
                     <li>
-                        <a href='#' className='icon_link' target='_blank'>
+                        <a href='https://www.linkedin.com/in/rian-air-7b5a29213/' className='icon_link' target='_blank' title='RianAir | LinkedIn'>
                             <FaLinkedinIn />
                         </a>
                     </li>
                     <li>
-                        <a href='#' className='icon_link' target='_blank'>
+                        <a href='https://twitter.com/RianAir16?s=08' className='icon_link' target='_blank' title='RianAir | X'>
                             <FaXTwitter />
                         </a>
                     </li>
@@ -113,11 +113,11 @@ const Footer = () => {
 
             <div className='footer_links'>
                 <ul>
-                    <li><Link href={'#'} className='link_' title=''>About Us</Link></li>
-                    <li><Link href={'#'} className='link_' title=''>FAQ</Link></li>
-                    <li><Link href={'#'} className='link_' title=''>Terms & Conditions</Link></li>
-                    <li><Link href={'#'} className='link_' title=''>Privacy Policy</Link></li>
-                    <li><Link href={'#'} className='link_' title=''>Career</Link></li>
+                    <li><Link href={'#'} className='link_' title='About Us'>About Us</Link></li>
+                    <li><Link href={'#'} className='link_' title='FAQ'>FAQ</Link></li>
+                    <li><Link href={'#'} className='link_' title='Terms & Conditions'>Terms & Conditions</Link></li>
+                    <li><Link href={'#'} className='link_' title='Privacy Policy'>Privacy Policy</Link></li>
+                    <li><Link href={'#'} className='link_' title='Career'>Career</Link></li>
                 </ul>
             </div>
         </RContainer>
@@ -125,7 +125,7 @@ const Footer = () => {
         <hr />
 
         <RContainer>
-            <p className='footer_copyright'>&copy; RianAir {new Date().getFullYear()}. All rights reserved | Powered by <a href='#'>nomadicdev.io</a></p>
+            <p className='footer_copyright'>&copy; RianAir {new Date().getFullYear()}. All rights reserved | Powered by <a href='#' title='nomadicdev'>nomadicdev.io</a></p>
         </RContainer>
 
         
