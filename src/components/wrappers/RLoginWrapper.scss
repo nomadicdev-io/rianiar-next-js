@@ -1,0 +1,16 @@
+.r_login_wrapper{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.r_login_form{
+    position: relative;
+    padding: 2rem;
+    width: 30rem;
+    height: auto;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    background-color: var(--bg-color-100);
+}

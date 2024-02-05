@@ -18,9 +18,9 @@ export const RAButton = ({title, theme, icon, href, size, target})=> {
     )
 }
 
-export const RButton = ({title, theme, icon, size, type})=> {
+export const RButton = ({title, theme, icon, size, type, onClick})=> {
     return (
-        <button title={title} className={`btn_ ${theme ? theme : 'primary'} ${size ? size : ''}`} type={type}>
+        <button title={title} onClick={onClick ? onClick : null} className={`btn_ ${theme ? theme : 'primary'} ${size ? size : ''}`} type={type}>
             <span>{title}</span>
             {
                 icon && <div className='icon_'>{icon}</div>

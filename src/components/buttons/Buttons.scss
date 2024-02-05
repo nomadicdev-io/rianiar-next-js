@@ -41,6 +41,23 @@
         background-color: var(--whatsapp-color);
     }
 
+    &.success {
+        background-color: var(--green-color);
+    }
+
+    &.danger {
+        background-color: var(--red-color);
+    }
+
+    &.warning {
+        background-color: var(--yellow-color);
+        color: var(--bg-color);
+
+        .icon_{
+            color: var(--text-color);
+        }
+    }
+
     &.lg_{
         height: 3.5rem;
         border-radius: 1.75rem;
@@ -67,6 +84,18 @@
 
         &.whatsapp{
             background-color: var(--whatsapp-color-600);
+        }
+
+        &.success{
+            background-color: var(--green-color-600);
+        }
+
+        &.danger{
+            background-color: var(--red-color-600);
+        }
+
+        &.warning{
+            background-color: var(--yellow-color-600);
         }
     }
 }

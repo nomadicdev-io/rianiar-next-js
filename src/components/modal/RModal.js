@@ -1,13 +1,17 @@
-import { RAButton, RButtonGroup, RIconButton } from '../buttons/Buttons';
+import { RAButton, RButton, RButtonGroup, RIconButton } from '../buttons/Buttons';
 import { FaArrowRight } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
-import { LuCopyCheck } from "react-icons/lu";
+import { FaCheck } from "react-icons/fa";
+import { GrRefresh } from "react-icons/gr";
+import { MdArrowOutward } from "react-icons/md";
+import { LuAlertTriangle } from "react-icons/lu";
+import { RxCross2 } from "react-icons/rx";
 import './RModal.scss';
 
-const RModal = () => {
+const RModal = ({closeModal, type, title, description}) => {
   return (
     <div className='r_modal'>
-      <div className='r_modal_overlay'></div>
+      <div className='r_modal_overlay' onClick={closeModal}></div>
 
 
 
@@ -15,27 +19,78 @@ const RModal = () => {
         <RIconButton 
           title={'Modal Close'}
           icon={<MdClose />}
-          onClick={()=> console.log('clicked')}
+          onClick={closeModal}
         />
       </div>
 
-      <div className='r_modal_content'>
+      <div className={`r_modal_content ${type}`}>
 
-        <div className='r_modal_icon success_'>
-          <LuCopyCheck />
-        </div>
+        {
+          type == 'success' &&
+          <div className='r_modal_icon '>
+            <div className='icon_'>
+              <FaCheck />
+            </div>
+          </div>
+        }
+
+        {
+          type == 'danger' &&
+          <div className='r_modal_icon '>
+            <div className='icon_'>
+              <RxCross2 />
+            </div>
+          </div>
+        }
+
+        {
+          type == 'warning' &&
+          <div className='r_modal_icon '>
+            <div className='icon_'>
+              <LuAlertTriangle />
+            </div>
+          </div>
+        }
 
         <div className='content_'>
-          <h4>Thank You!</h4>
-          <p>We've received your submission, and we'll be in touch soon!</p>
+          {
+            title && <h4>{title}</h4>
+          }
+          {
+            description && <p>{description}</p>
+          }
         </div>
 
         <RButtonGroup cssClass={'center_'}>
-          <RAButton 
-            title={'Keep Exploring'}
-            href={'/'}
-            icon={<FaArrowRight />} 
-          />
+          {
+            type == 'success' && 
+            <RAButton 
+              title={'Keep Exploring'}
+              href={'/'}
+              icon={<FaArrowRight />} 
+            />
+          }
+
+          {
+            type == 'danger' && 
+            <RButton 
+              title={'Try Again'}
+              type={'button'}
+              onClick={closeModal}
+              icon={<GrRefresh />} 
+              theme={'danger'}
+            />
+          }
+
+          {
+            type == 'warning' && 
+            <RAButton 
+              title={'Back To Page'}
+              href={'/'}
+              theme={'warning'}
+              icon={<MdArrowOutward />} 
+            />
+          }
         </RButtonGroup>
       </div>
 

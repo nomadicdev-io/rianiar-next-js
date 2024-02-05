@@ -7,10 +7,15 @@ import { FaCheck } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import RModal from "../modal/RModal";
+import { client } from "@/app/appwrite";
+import { Databases, ID } from "appwrite";
+import FormLoader from "./FormLoader";
+
+const databases = new Databases(client);
 
 const RRegistrationForm = () => {
 
-    const { register, control, handleSubmit, formState: { errors } } = useForm({
+    const { reset, register, control, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
           first_name: '',
           last_name: '',
@@ -21,7 +26,8 @@ const RRegistrationForm = () => {
         },
     });
     const [countries, setCountries] = useState(null);
-    const [states, setStates] = useState(null)
+    const [modal, setModal] = useState({type: '', show: false, title: '', description: ''})
+    const [formLoader, setFormLoader] = useState(false)
 
     const headers = new Headers();
     headers.append("X-CSCAPI-KEY", process.env.NEXT_PUBLIC_COUNTRY_API_KEY);
@@ -31,6 +37,22 @@ const RRegistrationForm = () => {
         headers: headers,
         redirect: 'follow'
     };
+
+    const getAllCountries = async ()=> {
+        try{
+            const res = await fetch("https://api.countrystatecity.in/v1/countries", requestOptions)
+            const data = await res.json();
+
+            const countryArray = data.map(item=> {
+                return {label: item.name, value: item.name, iso2: item.iso2}
+            })
+
+            setCountries(countryArray)
+
+        }catch(error){
+            console.log(error)
+        }
+    }
 
     const educationdata = [
         {label: 'Senior School ', value: 'Senior School '},
@@ -49,22 +71,6 @@ const RRegistrationForm = () => {
         {label: 'Aircraft Maintenance Engineer', value: 'Aircraft Maintenance Engineer'}
     ]
 
-    const getAllCountries = async ()=> {
-        try{
-            const res = await fetch("https://api.countrystatecity.in/v1/countries", requestOptions)
-            const data = await res.json();
-
-            const countryArray = data.map(item=> {
-                return {label: item.name, value: item.name, iso2: item.iso2}
-            })
-
-            setCountries(countryArray)
-
-        }catch(error){
-            console.log(error)
-        }
-    }
-
     const years = (new Array(2008 - 1984 + 1)).fill(undefined).map((_, i) => i + 1984)
 
 
@@ -74,6 +80,8 @@ const RRegistrationForm = () => {
 
     const onSubmit = async (data) => {
        try{
+            setFormLoader(true);
+
             const postData = await {
                 ...data,
                 submission_date: new Date(),
@@ -83,9 +91,34 @@ const RRegistrationForm = () => {
                 age: Math.floor((new Date() - new Date(data.dob).getTime()) / 3.15576e+10),
             }
 
-            console.log(postData)
+            const res = await databases.createDocument(
+                process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
+                '65ba185d505bda84ea4b',
+                ID.unique(),
+                postData
+            );
+
+            setFormLoader(false);
+
+            reset();
+
+            setModal({
+                type: 'success',
+                show: true,
+                title: 'Thank You!',
+                description: "We've received your submission and we'll be in touch soon!"
+            })
+             
        }catch(err){
-            console.log(err)
+
+            setFormLoader(false);
+
+            setModal({
+                type: 'danger',
+                show: true,
+                title: 'Whoops!',
+                description: err.message
+            })
        }
     }
 
@@ -138,6 +171,7 @@ const RRegistrationForm = () => {
                 name="country"
                 control={control}
                 rules={{ required: true }}
+                defaultValue=""
                 render={({ field }) => (
                     <RSelect 
                         title={'Country'}
@@ -204,6 +238,7 @@ const RRegistrationForm = () => {
                 name="qualification"
                 control={control}
                 rules={{ required: true }}
+                defaultValue=""
                 render={({ field }) => (
                     <RSelect 
                         title={'Education Qualification'}
@@ -221,6 +256,7 @@ const RRegistrationForm = () => {
                 name="programs"
                 control={control}
                 rules={{ required: true }}
+                defaultValue=""
                 render={({ field }) => (
                     <RSelect 
                         title={'Programs'}
@@ -261,7 +297,20 @@ const RRegistrationForm = () => {
                 />
             </RButtonGroup>
 
-            <RModal />
+            {
+                formLoader && <FormLoader />
+            }
+
+            {
+                modal.show && 
+                <RModal 
+                    type={modal.type}
+                    title={modal.title}
+                    description={modal.description}
+                    closeModal={()=> setModal({...modal, show: false})}
+                />
+            }
+            
 
         </form>
     )
