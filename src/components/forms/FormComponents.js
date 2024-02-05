@@ -6,20 +6,21 @@ import { FaCheck } from "react-icons/fa6";
 import DatePicker from "react-datepicker";
 import { LuCalendarDays } from "react-icons/lu";
 import "react-datepicker/dist/react-datepicker.css";
+import { getMonth, getYear } from "date-fns";
 
-export const RInput = ({title, type, controller, cssClass})=> {
+export const RInput = ({title, type, controller, cssClass, error})=> {
     const id = useId();
     return (
-        <div className={`r_input_field ${cssClass}`}>
+        <div className={`r_input_field ${cssClass} ${error && 'error_'}`}>
             <label htmlFor={id} >{title}</label>
             <input type={type} {...controller} id={id}/>
         </div>
     )
 }
 
-export const RRadio = ({title, type, controller, cssClass, data})=> {
+export const RRadio = ({title, type, controller, cssClass, data, error})=> {
     return (
-        <div className={`r_input_field ${cssClass}`}>
+        <div className={`r_input_field ${cssClass} ${error && 'error_'}`}>
             <label>{title}</label>
             <div className='radio_group'>
 
@@ -37,17 +38,12 @@ export const RRadio = ({title, type, controller, cssClass, data})=> {
     )
 }
 
-export const RSelect = ({title, controller, cssClass, data, placeholder, onValueChanged, isLoading})=> {
+export const RSelect = ({title, controller, cssClass, data, placeholder, isSearchable, error})=> {
 
     const id = useId();
-    const [selectedOption, setSelectedOption] = useState(null);
-
-    const selectChange = (el)=> {
-        console.log(el)
-    }
 
     return (
-        <div className={`r_input_field ${cssClass}`}>
+        <div className={`r_input_field ${cssClass} ${error && 'error_'}`}>
             <label htmlFor={id} >{title}</label>
             {
                 data ? (
@@ -57,7 +53,9 @@ export const RSelect = ({title, controller, cssClass, data, placeholder, onValue
                         placeholder={placeholder}
                         classNamePrefix={'r_select_pre'}
                         {...controller}
-                        onChange={el => onValueChanged ? onValueChanged(el) : null}
+                        id={id}
+                        instanceId={id}
+                        isSearchable={isSearchable ? isSearchable : true}
                     />
                 ) : (
                     <div className='placeholder_' />
@@ -67,10 +65,10 @@ export const RSelect = ({title, controller, cssClass, data, placeholder, onValue
     )
 }
 
-export const RCheckbox = ({children, cssClass, controller})=> {
+export const RCheckbox = ({children, cssClass, controller, error})=> {
     const id = useId();
     return (
-        <div className={`r_input_field ${cssClass}`}>
+        <div className={`r_input_field ${cssClass} ${error && 'error_'}`}>
             <div className='r_checkbox'>
                 <input type='checkbox' id={id} {...controller}/>
                 <span><FaCheck /></span>
@@ -80,17 +78,65 @@ export const RCheckbox = ({children, cssClass, controller})=> {
     )
 }
 
-export const RDatepicker = ({title, controller, cssClass})=> {
+export const RDatepicker = ({title, controller, cssClass, customHeader, years, error})=> {
 
     const id = useId();
+    const [date] = useState(years ? new Date(years[0], 0) : new Date());
 
-    const [startDate, setStartDate] = useState(new Date());
+    const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+
+    const datePickerHeader = ({ date,changeYear,changeMonth,decreaseMonth,increaseMonth,prevMonthButtonDisabled,nextMonthButtonDisabled,}) => (
+        <div className="custom_datepicker_header">
+          <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+            {"<"}
+          </button>
+          <select value={getYear(date)} onChange={({ target: { value } }) => changeYear(value)}>
+            {years.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+
+          <select value={months[getMonth(date)]} onChange={({ target: { value } }) =>
+              changeMonth(months.indexOf(value))
+            }
+          >
+            {months.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+
+          <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
+            {">"}
+          </button>
+        </div>
+    )
 
     return (
-        <div className={`r_input_field ${cssClass}`}>
+        <div className={`r_input_field ${cssClass} ${error && 'error_'}`}>
             <label htmlFor={id} >{title}</label>
             <div className='datepicker_'>
-                <DatePicker {...controller} selected={startDate} onChange={(date) => setStartDate(date)} />
+                <DatePicker 
+                renderCustomHeader={customHeader ? datePickerHeader : null}
+                {...controller} 
+                selected={controller.value ? controller.value : date}
+                />
                 <div className='icon_'>
                     <LuCalendarDays />
                 </div>
@@ -99,10 +145,10 @@ export const RDatepicker = ({title, controller, cssClass})=> {
     )
 }
 
-export const RTextArea = ({title, type, controller, cssClass})=> {
+export const RTextArea = ({title, type, controller, cssClass, error})=> {
     const id = useId();
     return (
-        <div className={`r_input_field ${cssClass}`}>
+        <div className={`r_input_field ${cssClass} ${error && 'error_'}`}>
             <label htmlFor={id} >{title}</label>
             <textarea type={type} {...controller} id={id}/>
         </div>

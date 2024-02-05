@@ -6,10 +6,20 @@ import { RButton, RButtonGroup } from "../buttons/Buttons"
 import { FaCheck } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import RModal from "../modal/RModal";
 
 const RRegistrationForm = () => {
 
-    const { register, control, handleSubmit } = useForm();
+    const { register, control, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+          first_name: '',
+          last_name: '',
+          email: '',
+          phone: '',
+          address: '',
+          terms: ''
+        },
+    });
     const [countries, setCountries] = useState(null);
     const [states, setStates] = useState(null)
 
@@ -32,11 +42,11 @@ const RRegistrationForm = () => {
     const programsData = [
         {label: 'Commercial Pilot License', value: 'Commercial Pilot License'},
         {label: 'Artificial Intelligence In Aerospace', value: 'Artificial Intelligence In Aerospace'},
-        {label: 'Private Pilot License', name: 'Private Pilot License'},
-        {label: 'Multi-Engine Rating', name: 'Multi-Engine Rating'},
-        {label: 'Type Rating', name: 'Type Rating'},
-        {label: 'Cabin Crew', name: 'Cabin Crew'},
-        {label: 'Aircraft Maintenance Engineer', name: 'Aircraft Maintenance Engineer'}
+        {label: 'Private Pilot License', value: 'Private Pilot License'},
+        {label: 'Multi-Engine Rating', value: 'Multi-Engine Rating'},
+        {label: 'Type Rating', value: 'Type Rating'},
+        {label: 'Cabin Crew', value: 'Cabin Crew'},
+        {label: 'Aircraft Maintenance Engineer', value: 'Aircraft Maintenance Engineer'}
     ]
 
     const getAllCountries = async ()=> {
@@ -55,118 +65,136 @@ const RRegistrationForm = () => {
         }
     }
 
-    const getAllStates = async (el)=> {
-        try{
+    const years = (new Array(2008 - 1984 + 1)).fill(undefined).map((_, i) => i + 1984)
 
-            setStates(null)
-
-            const res = await fetch(`https://api.countrystatecity.in/v1/countries/${el.iso2}/states`, requestOptions)
-            const data = await res.json();
-
-            const stateArray = data.map(item=> {
-                return {label: item.name, value: item.name, iso2: item.iso2}
-            })
-
-            setStates(stateArray)
-
-        }catch(error){
-            console.log(error)
-        }
-    }
 
     useEffect(()=> {
         getAllCountries();
     }, [])
 
-    const onSubmit = (data) => console.log(data);
+    const onSubmit = async (data) => {
+       try{
+            const postData = await {
+                ...data,
+                submission_date: new Date(),
+                country: data.country.label,
+                programs: data.programs.label,
+                qualification: data.qualification.label,
+                age: Math.floor((new Date() - new Date(data.dob).getTime()) / 3.15576e+10),
+            }
+
+            console.log(postData)
+       }catch(err){
+            console.log(err)
+       }
+    }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="register_form_grid">
-            <RInput 
-                title={'First Name'}
-                cssClass={'half_'}
-                type={'text'}
-                controller={{...register("first_name", { required: true, maxLength: 20 })}}
+
+            <Controller
+                name="first_name"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                    <RInput 
+                        title={'First Name'}
+                        cssClass={'half_'}
+                        type={'text'}
+                        controller={{...field}}
+                        error={errors.first_name}
+                    />
+
+                )}
             />
 
-            <RInput 
-                title={'Last Name'}
-                cssClass={'half_'}
-                type={'text'}
-                controller={{...register("last_name", { required: true, maxLength: 20 })}}
+            <Controller
+                name="last_name"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                    <RInput 
+                        title={'Last Name'}
+                        cssClass={'half_'}
+                        type={'text'}
+                        controller={{...field}}
+                        error={errors.last_name}
+                    />
+
+                )}
             />
 
             <RRadio 
                 title={'Gender'}
                 cssClass={'full_'}
                 type={'radio'}
+                rules={{ required: true }}
                 data={[{name: 'Male', value: 'male'}, {name: 'Female', value: 'female'}, {name: 'Others', value: 'others'}]}
+                error={errors.gender}
                 controller={{...register("gender", { required: true })}}
             /> 
 
             <Controller
                 name="country"
                 control={control}
+                rules={{ required: true }}
                 render={({ field }) => (
                     <RSelect 
                         title={'Country'}
                         cssClass={'half_'}
                         placeholder={'Choose Country'}
-                        required={true}
                         controller={{...field}}
                         data={countries}
-                        onValueChanged={getAllStates}
+                        error={errors.country}
                     />
 
                 )}
             />
 
             <Controller
-                name="state"
+                name="email"
                 control={control}
+                rules={{ required: true }}
                 render={({ field }) => (
-                    <RSelect 
-                        title={'State'}
+                    <RInput 
+                        title={'Email'}
                         cssClass={'half_'}
-                        placeholder={'Choose State'}
-                        required={true}
+                        type={'email'}
                         controller={{...field}}
-                        data={states}
+                        error={errors.email}
                     />
 
                 )}
             />
 
-            <RInput 
-                title={'Email'}
-                cssClass={'half_'}
-                type={'email'}
-                controller={{...register("email", { required: true })}}
-            />
+            <Controller
+                name="phone"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                    <RInput 
+                        title={'Phone Number'}
+                        cssClass={'half_'}
+                        type={'number'}
+                        controller={{...field}}
+                        error={errors.phone}
+                    />
 
-            <RInput 
-                title={'Phone'}
-                cssClass={'half_'}
-                type={'number'}
-                controller={{...register("dob", { required: true})}}
-            />
-
-            <RInput 
-                title={'Address'}
-                cssClass={'half_'}
-                type={'text'}
-                controller={{...register("address", { required: true, maxLength: 13 })}}
+                )}
             />
 
             <Controller
                 name="dob"
                 control={control}
+                rules={{ required: true }}
                 render={({ field }) => (
                     <RDatepicker 
                         title={'Date of Birth'}
                         cssClass={'half_'}
-                        required={true}
+                        customHeader={true}
+                        years={years}
                         controller={{...field}}
+                        error={errors.dob}
                     />
 
                 )}
@@ -175,14 +203,15 @@ const RRegistrationForm = () => {
             <Controller
                 name="qualification"
                 control={control}
+                rules={{ required: true }}
                 render={({ field }) => (
                     <RSelect 
                         title={'Education Qualification'}
                         cssClass={'full_'}
                         placeholder={'Choose Qualification'}
-                        required={true}
                         controller={{...field}}
                         data={educationdata}
+                        error={errors.qualification}
                     />
 
                 )}
@@ -191,28 +220,35 @@ const RRegistrationForm = () => {
             <Controller
                 name="programs"
                 control={control}
+                rules={{ required: true }}
                 render={({ field }) => (
                     <RSelect 
                         title={'Programs'}
                         cssClass={'full_'}
                         placeholder={'Choose Program'}
-                        required={true}
                         controller={{...field}}
                         data={programsData}
+                        error={errors.programs}
                     />
 
                 )}
             />
 
-            <RTextArea 
-                title={'Address'}
-                cssClass={'full_'}
-                type={'text'}
-                controller={{...register("address", { required: true, maxLength: 200 })}}
+            <Controller
+                name="address"
+                control={control}
+                render={({ field }) => (
+                    <RTextArea 
+                        title={'Address'}
+                        cssClass={'full_'}
+                        type={'text'}
+                        controller={{...field}}
+                    />
+
+                )}
             />
 
-
-            <RCheckbox cssClass={'full_'} controller={{...register("terms", { required: true })}}>
+            <RCheckbox cssClass={'full_'} controller={{...register("terms", { required: true })}} error={errors.terms}>
                 <p>I have read, understood and accept the <Link href={'/terms'}>terms and conditions.</Link></p>
             </RCheckbox>
 
@@ -224,6 +260,8 @@ const RRegistrationForm = () => {
                     icon={<FaCheck />}
                 />
             </RButtonGroup>
+
+            <RModal />
 
         </form>
     )

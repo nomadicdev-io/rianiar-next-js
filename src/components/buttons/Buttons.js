@@ -36,3 +36,11 @@ export const RAIconButton = ({title, theme, icon, href, size, target})=> {
         </Link>
     )
 }
+
+export const RIconButton = ({title, theme, icon, size, type, onClick})=> {
+    return (
+        <button title={title} className={`btn_icon ${theme ? theme : 'primary'} ${size ? size : ''}`} type={type} onClick={onClick}>
+            {icon}
+        </button>
+    )
+}

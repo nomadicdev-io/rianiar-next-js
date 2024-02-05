@@ -2,7 +2,4 @@
 const nextConfig = {}
 
 module.exports = {
-    compiler: {
-        styledComponents: true,
-    },
 }
