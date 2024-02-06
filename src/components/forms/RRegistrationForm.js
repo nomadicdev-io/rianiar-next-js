@@ -10,6 +10,7 @@ import RModal from "../modal/RModal";
 import { client } from "@/app/appwrite";
 import { Databases, ID } from "appwrite";
 import FormLoader from "./FormLoader";
+import { AnimatePresence } from "framer-motion";
 
 const databases = new Databases(client);
 
@@ -188,7 +189,7 @@ const RRegistrationForm = () => {
             <Controller
                 name="email"
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: true, pattern:  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/ }}
                 render={({ field }) => (
                     <RInput 
                         title={'Email'}
@@ -302,13 +303,17 @@ const RRegistrationForm = () => {
             }
 
             {
-                modal.show && 
-                <RModal 
-                    type={modal.type}
-                    title={modal.title}
-                    description={modal.description}
-                    closeModal={()=> setModal({...modal, show: false})}
-                />
+                <AnimatePresence>
+                    {
+                        modal.show && 
+                        <RModal 
+                            type={modal.type}
+                            title={modal.title}
+                            description={modal.description}
+                            closeModal={()=> setModal({...modal, show: false})}
+                        />
+                    }
+                </AnimatePresence>
             }
             
 

@@ -7,23 +7,42 @@ import { MdArrowOutward } from "react-icons/md";
 import { LuAlertTriangle } from "react-icons/lu";
 import { RxCross2 } from "react-icons/rx";
 import './RModal.scss';
+import {motion} from "framer-motion";
 
 const RModal = ({closeModal, type, title, description}) => {
   return (
     <div className='r_modal'>
-      <div className='r_modal_overlay' onClick={closeModal}></div>
+      <motion.div 
+        initial={{ opacity: 0}}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+        exit={{ opacity: 0 }}
+        className='r_modal_overlay' 
+        onClick={closeModal}>
+      </motion.div>
 
 
 
-      <div className='r_modal_action'>
+      <motion.div 
+      initial={{ opacity: 0}}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+      exit={{ opacity: 0 }}
+      className='r_modal_action'>
         <RIconButton 
           title={'Modal Close'}
           icon={<MdClose />}
           onClick={closeModal}
         />
-      </div>
+      </motion.div>
 
-      <div className={`r_modal_content ${type}`}>
+      <motion.div 
+        className={`r_modal_content ${type}`}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
+        exit={{ opacity: 0, scale: 0 }}
+      >
 
         {
           type == 'success' &&
@@ -64,9 +83,10 @@ const RModal = ({closeModal, type, title, description}) => {
         <RButtonGroup cssClass={'center_'}>
           {
             type == 'success' && 
-            <RAButton 
+            <RButton 
               title={'Keep Exploring'}
-              href={'/'}
+              type={'button'}
+              onClick={closeModal}
               icon={<FaArrowRight />} 
             />
           }
@@ -92,7 +112,7 @@ const RModal = ({closeModal, type, title, description}) => {
             />
           }
         </RButtonGroup>
-      </div>
+      </motion.div>
 
     </div>
   )

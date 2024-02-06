@@ -5,18 +5,63 @@ import RContainer from '../common/RContainer'
 import './Footer.scss'
 import Image from 'next/image'
 import { FaRegPaperPlane } from "react-icons/fa6"
-import { useState } from 'react'
 import { FaWhatsapp, FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import { useForm } from "react-hook-form"
+import RModal from "../modal/RModal";
+import { client } from "@/app/appwrite";
+import { Databases, ID } from "appwrite";
+import FormLoader from "../forms/FormLoader";
+import { useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
+
+const databases = new Databases(client);
 
 const SubscribeNewsletter = ()=> {
 
-    const [email, setEmail] = useState('')
+    const { reset, register, handleSubmit, formState: { errors } } = useForm();
+    const [modal, setModal] = useState({type: '', show: false, title: '', description: ''})
+    const [formLoader, setFormLoader] = useState(false)
 
-    const onSubmit = (e)=> {
-        e.preventDefault();
-        console.log(email)
+    const onSubmit = async (data)=> {
+        try{
+            setFormLoader(true);
+
+            const postData = await {
+                ...data,
+                date: new Date(),
+            }
+
+            const res = await databases.createDocument(
+                process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
+                'r_newsletter_subscription',
+                ID.unique(),
+                postData
+            );
+
+            setFormLoader(false);
+
+            reset();
+
+            setModal({
+                type: 'success',
+                show: true,
+                title: 'Thank You!',
+                description: "We've received your submission and we'll be in touch soon!"
+            })
+             
+       }catch(err){
+
+            setFormLoader(false);
+
+            setModal({
+                type: 'danger',
+                show: true,
+                title: 'Whoops!',
+                description: err.message
+            })
+       }
     }
 
     return (
@@ -24,12 +69,30 @@ const SubscribeNewsletter = ()=> {
             <h4>Subscribe to Our Newsletter</h4>
             <p>Stay informed with our newsletter for updates, exclusive content. Stay informed and be part of our community.</p>
 
-            <form className='subscribe_form' onSubmit={onSubmit}>
-                <input type='text' placeholder='Your Email Address' value={email} onChange={(e)=> setEmail(e.target.value)}/>
+            <form className={`subscribe_form ${errors.email && 'error_'}`} onSubmit={handleSubmit(onSubmit)}>
+                <input type='text' placeholder='Your Email Address' {...register("email", { required: true,  pattern:  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, })}/>
                 <button type='submit'>
                     <FaRegPaperPlane />
                 </button>
             </form>
+
+            {
+                formLoader && <FormLoader />
+            }
+
+            {
+               <AnimatePresence>
+                {
+                    modal.show && 
+                    <RModal 
+                        type={modal.type}
+                        title={modal.title}
+                        description={modal.description}
+                        closeModal={()=> setModal({...modal, show: false})}
+                    />
+                }
+               </AnimatePresence>
+            }
         </div>
     )
 }
