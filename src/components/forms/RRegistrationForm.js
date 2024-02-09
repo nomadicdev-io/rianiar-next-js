@@ -154,7 +154,6 @@ const RRegistrationForm = () => {
                         controller={{...field}}
                         error={errors.last_name}
                     />
-
                 )}
             />
 
