@@ -5,11 +5,15 @@
     --primary-color-600: #0758a2;
     --secondary-color: #06BFEA;
     --secondary-color-600: #0486a4;
-    --dark-color: #1D1D1D;
+
+    --dark-color: #151515;
     --bg-color: #131313;
     --bg-color-100: #242424;
+    --bg-color-300: #181818;
+    --bg-color-600: #151515;
     --bg-color-transparent: #13131385;
-    --text-color: #EEEEEE;
+
+    --text-color: #EDEDED;
     --whatsapp-color: #25D366;
     --whatsapp-color-600: #128c7e;
     --red-color: #E71D36;
@@ -18,6 +22,10 @@
     --green-color-600: #1baf52;
     --yellow-color: #efc11b;
     --yellow-color-600: #d8af19;
+
+    --border-color: #272727;
+
+    --border-radius: 1.35rem;
 
     @media only screen and (max-width:1320px){
         --font-size: 14px;

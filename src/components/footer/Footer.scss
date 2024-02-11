@@ -2,7 +2,6 @@
     position: relative;
     display: block;
     width: 100%;
-    padding-block: 2rem;
 }
 
 
@@ -11,6 +10,7 @@
     text-align: center;
     width: 100%;
     margin-bottom: 1.75rem;
+    padding-top: 2rem;
 
     a{
         position: relative;
@@ -176,10 +176,27 @@
 
 .footer_copyright{
     position: relative;
-    display: block;
+    display: flex;
+    align-items: center;
     text-align: center;
-    margin: 2rem 0 0;
-    font-size: 1rem;
+    justify-content: center;
+    padding-block: 1rem;
+    border-top: 1px solid var(--border-color);
+    height: 4.25rem;
+    padding: 0 1.5rem;
+
+    @media only screen and (max-width: 767px){
+        height: auto;
+        padding-block: 1.5rem;
+    }
+
+    p{
+        position: relative;
+        display: block;
+        margin: 0;
+        font-size: 0.9rem;
+        margin: 0;
+    }
 }
 
 .footer_bg{

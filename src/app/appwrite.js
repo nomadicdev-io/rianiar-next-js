@@ -8,3 +8,8 @@ client
 
 export const account = new Account(client);
 export { ID } from 'appwrite';
+
+export const db_collection = {
+    registration: 'r_registrations',
+    newsletter: 'r_newsletter_subscription',
+}

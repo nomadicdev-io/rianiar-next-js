@@ -2,7 +2,7 @@
 
 const RSection = ({children, cssClass}) => {
   return (
-    <section className={`section_ ${cssClass}`}>
+    <section className={`section_ ${cssClass ? cssClass : ''}`}>
         {children}
     </section>
   )

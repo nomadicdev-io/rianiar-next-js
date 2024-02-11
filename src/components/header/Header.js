@@ -119,7 +119,7 @@ const Header = () => {
     }, [])
 
   return (
-    <header className={`${isScrolling ? 'hide_' : ''} ${isScrolled ? 'scrolled_' : ''}`}>
+    <header className={`r_main_header ${isScrolling ? 'hide_' : ''} ${isScrolled ? 'scrolled_' : ''}`}>
         <RContainer>
 
             <NavWrapper>

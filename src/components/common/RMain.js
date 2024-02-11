@@ -1,22 +1,35 @@
 "use client"
 
-import { usePathname } from "next/navigation"
+import { usePathname, useSelectedLayoutSegments } from "next/navigation"
 import PageInnerBG from "./PageInnerBG";
 
 const Main = ({children}) => {
 
     const currentRoute = usePathname();
+    const conditionalPath = useSelectedLayoutSegments();
 
-  return (
-    <main className={`main_ ${currentRoute == '/' ? '' : 'inner_page'}`}>
+    if(conditionalPath[0] == 'admin'){
+      return (
+        <main className={'main_ dashboard_'}>
+          {children}
+        </main>
+      )
+    }else if(currentRoute == '/'){
+      return (
+        <main className={'main_'}>
+          {children}
+        </main>
+      )
+    }
 
-        {
-            currentRoute != '/' && <PageInnerBG />
-        }
-
+    return (
+      <main className={`main_ ${currentRoute == '/' ? '' : 'inner_page'} ${conditionalPath[0] == 'admin' && 'dashboard_' }`}>
+        <PageInnerBG />
         {children}
-    </main>
-  )
+      </main>
+    )
+ 
+
 }
 
 export default Main

@@ -5,6 +5,9 @@ import RSection from "@/components/common/RSection";
 import RSectionTitile from "@/components/common/RSectionTitile";
 import RRegistrationForm from "@/components/forms/RRegistrationForm";
 import RRegistrationWrapper from "@/components/wrappers/RRegistrationWrapper";
+import { atom } from "jotai";
+
+export const countryArray = atom('')
 
 export default function Apply() {
 

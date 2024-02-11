@@ -7,7 +7,7 @@ import RLoginWrapper from "@/components/wrappers/RLoginWrapper";
 export default function Login() {
 
     return (
-        <RSection>
+        <RSection cssClass={'less_padding'}>
             <RContainer>
                <RLoginWrapper />
             </RContainer>

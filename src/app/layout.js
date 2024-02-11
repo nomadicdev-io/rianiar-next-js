@@ -1,11 +1,15 @@
 import PageLoader from '@/components/common/PageLoader';
 import RMain from '@/components/common/RMain';
 import Footer from '@/components/footer/Footer';
-import Header from '@/components/header/Header';
+import RHeader from '@/components/header/RHeader';
 import '@/styles/app.scss';
 import { Gabarito } from 'next/font/google'
 
-const fontGabarito = Gabarito({ subsets: ['latin'] })
+const fontGabarito = Gabarito({ 
+  subsets: ['latin'],
+  weight: [ '400', '500', '600', '800'],
+  display: 'swap',
+})
 
 export const metadata = {
   metadataBase: new URL('https://rianair.in'),
@@ -28,13 +32,14 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
+  
   return (
     <html lang="en">
       <body className={fontGabarito.className}>
 
           {/*<PageLoader />*/}
 
-          <Header />
+          <RHeader />
           
           <RMain>{children}</RMain>
 
