@@ -1,9 +1,7 @@
 import '@/components/admin/RAdmin.scss'
 import RAdminBody from '@/components/admin/RAdminBody';
 import RAdminSideNav from '@/components/admin/RAdminSideNav'
-import adminStore from '@/store/adminStore';
 import { atom } from 'jotai';
-import { useHydrateAtoms } from 'jotai/utils'
 
 export const adminContext = atom(null)
 
