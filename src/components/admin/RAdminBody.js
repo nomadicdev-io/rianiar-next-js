@@ -1,19 +1,24 @@
 "use client"
 
-import { useAtomValue } from "jotai"
+import { useAtom, useAtomValue } from "jotai"
 import RAdminBanner from "./RAdminBanner"
 import RAdminSection from "./RAdminSection"
-import { pageContext } from "@/app/admin/layout"
+import { adminContext } from "@/app/admin/layout"
+import { useEffect } from "react"
 
 const RAdminBody = ({children, data}) => {
 
-    const getPageData = useAtomValue(pageContext)
+  const [pageData, setPageData] = useAtom(adminContext)
+
+  useEffect(()=> {
+    setPageData(data)
+  }, [])
 
   return (
     <>
         <RAdminBanner 
-            title={getPageData.title}
-            breadcrumbData={getPageData.breadcrumb}
+            title={pageData?.title}
+            breadcrumbData={pageData?.breadcrumb}
         />
         <RAdminSection>
             {children}

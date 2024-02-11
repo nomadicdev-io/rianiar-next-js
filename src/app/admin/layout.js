@@ -3,14 +3,23 @@ import RAdminBody from '@/components/admin/RAdminBody';
 import RAdminSideNav from '@/components/admin/RAdminSideNav'
 import adminStore from '@/store/adminStore';
 import { atom } from 'jotai';
+import { useHydrateAtoms } from 'jotai/utils'
 
-export const pageContext = atom(adminStore.pages.dashboard)
+export const adminContext = atom(null)
 
-const AdminLayout = ({children}) => {
+async function getData() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin`)
+  return res.json()
+}
+
+const AdminLayout = async ({children}) => {
+
+  const data = await getData()
+
   return (
     <div className="r_admin_body">
         <RAdminSideNav />
-        <RAdminBody>
+        <RAdminBody data={data}>
           {children}
         </RAdminBody>
     </div>

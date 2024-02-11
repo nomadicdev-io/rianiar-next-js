@@ -9,13 +9,13 @@ const RAdminBreadcrumb = ({data}) => {
                 data.map((item, index)=> 
                     {if(index == data.length - 1){
                         return (
-                            <li>
+                            <li key={`bc_r_${index}`}>
                                 <p>{index == 0 && <i><FiHome /></i>}{item.title}</p>
                             </li> 
                         )
                     }else{
                         return (
-                            <li>
+                            <li key={`bc_r_${index}`}>
                                 <Link href={item.slug} title={item.title}>{index == 0 && <i><FiHome /></i>}{item.title}</Link>
                             </li>
                         )
