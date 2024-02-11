@@ -1,19 +1,15 @@
-import RAdminBanner from "@/components/admin/RAdminBanner"
-import { questionsData } from "@/store/adminData"
+import adminStore from "@/store/adminStore"
 
 export const metadata = {
-  title: questionsData.siteTitle,
+  title: `${adminStore.pages.questions.title} | ${adminStore.title}`,
 }
 
 const AdminQuestions = () => {
-    return (
-      <>
-        <RAdminBanner 
-            breadcrumbData={questionsData.questions.breadcrumb}
-            title={questionsData.questions.title}
-        ></RAdminBanner>
-      </>
-    )
-  }
-  
-  export default AdminQuestions
+  return (
+    <>
+      
+    </>
+  )
+}
+
+export default AdminQuestions

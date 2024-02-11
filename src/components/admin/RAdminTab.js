@@ -4,10 +4,10 @@ const RAdminTab = () => {
     <div className="r_admin_tab">
         <ul>
             <li>
-                <button className="active_"><span>Latest</span></button>
+                <button className="active_"><span>All Registraions</span></button>
             </li>
             <li>
-                <button><span>All Registraions</span></button>
+                <button><span>Latest</span></button>
             </li>
             <li>
                 <button><span>Viewed</span></button>

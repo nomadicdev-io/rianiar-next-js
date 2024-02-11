@@ -1,21 +1,18 @@
 import '@/components/admin/RAdmin.scss'
-import RAdminBanner from '@/components/admin/RAdminBanner';
+import RAdminBody from '@/components/admin/RAdminBody';
 import RAdminSideNav from '@/components/admin/RAdminSideNav'
+import adminStore from '@/store/adminStore';
+import { atom } from 'jotai';
+
+export const pageContext = atom(adminStore.pages.dashboard)
 
 const AdminLayout = ({children}) => {
-
   return (
     <div className="r_admin_body">
         <RAdminSideNav />
-        {/* {
-          pageData &&
-          <RAdminBanner 
-            breadcrumbData={pageData.breadcrumb}
-            title={pageData.title}
-            greetings={1}
-          />
-        } */}
-        {children}
+        <RAdminBody>
+          {children}
+        </RAdminBody>
     </div>
   )
 }

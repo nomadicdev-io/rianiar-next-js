@@ -1,23 +1,13 @@
-import RAdminBanner from "@/components/admin/RAdminBanner"
-import RAdminSection from "@/components/admin/RAdminSection"
-import RAdminRegistraion from "@/components/admin/registraion/RAdminRegistraion"
-import { registrationData } from "@/store/adminData"
+import adminStore from "@/store/adminStore"
 
 export const metadata = {
-  title: registrationData.siteTitle,
+  title: `${adminStore.pages.registrations.title} | ${adminStore.title}`,
 }
 
 const AdminRegistraion = () => {
   return (
     <>
-      <RAdminBanner 
-          breadcrumbData={registrationData.breadcrumb}
-          title={registrationData.title}
-      >
-      </RAdminBanner>
-      <RAdminSection>
-        <RAdminRegistraion />
-      </RAdminSection>
+      
     </>
   )
 }

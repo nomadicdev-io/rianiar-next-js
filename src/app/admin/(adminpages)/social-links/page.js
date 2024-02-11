@@ -1,19 +1,15 @@
-import RAdminBanner from "@/components/admin/RAdminBanner"
-import { socialLinksData } from "@/store/adminData"
+import adminStore from "@/store/adminStore"
 
 export const metadata = {
-  title: socialLinksData.siteTitle,
+  title: `${adminStore.pages.socialMediaLinks.title} | ${adminStore.title}`,
 }
 
-const AdminSocialLinks = () => {
+const AdminSocialMediaLinks = () => {
   return (
     <>
-      <RAdminBanner 
-          breadcrumbData={socialLinksData.socialinks.breadcrumb}
-          title={socialLinksData.socialinks.title}
-      ></RAdminBanner>
+      
     </>
   )
 }
 
-export default AdminSocialLinks
+export default AdminSocialMediaLinks

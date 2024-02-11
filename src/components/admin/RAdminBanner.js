@@ -8,11 +8,7 @@ import RAdminPageTitle from "./RAdminPageTitle"
 
 const RAdminBanner = ({breadcrumbData, children, title, greetings}) => {
 
-    const paths = usePathname()
-
-    useEffect(()=> {
-        console.log(paths)
-    }, [])
+    const currentRoute = usePathname()
 
   return (
     <div className='r_admin_banner'>
@@ -22,12 +18,11 @@ const RAdminBanner = ({breadcrumbData, children, title, greetings}) => {
             }
             <div className="r_admin_banner_wrapper">
                 {
-                    title &&  <RAdminPageTitle title={title} greetings={greetings}/>
+                    title &&  <RAdminPageTitle title={title} greetings={currentRoute == '/admin' && 1}/>
                 }
                 {children}
             </div>
         </RAdminContainer>
-        
     </div> 
   )
 }
