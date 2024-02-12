@@ -3,25 +3,38 @@
 import { useAtom, useAtomValue } from "jotai"
 import RAdminBanner from "./RAdminBanner"
 import RAdminSection from "./RAdminSection"
-import { adminContext } from "@/app/admin/layout"
+import { activeContext, adminContext } from "@/app/admin/layout"
+import { usePathname } from "next/navigation"
 import { useEffect } from "react"
 
-const RAdminBody = ({children, data}) => {
+const RAdminBody = ({children}) => {
 
-  const [pageData, setPageData] = useAtom(adminContext)
+  const resData = useAtomValue(adminContext);
+  const currentPath = usePathname();
+  const [pageData, setPageData] = useAtom(activeContext)
 
   useEffect(()=> {
-    setPageData(data)
-  }, [])
+
+    if(!resData?.data?.pages) return;
+
+    const resArray = resData?.data?.pages;
+
+    resArray.map(item=> item.slug == currentPath && setPageData(item))
+  
+
+  }, [resData.data, currentPath])
 
   return (
     <>
-        <RAdminBanner 
-            title={pageData?.title}
-            breadcrumbData={pageData?.breadcrumb}
-        />
+        {
+          pageData &&
+          <RAdminBanner 
+            title={pageData.title}
+            breadcrumbData={pageData.breadcrumb}
+          /> 
+        }
         <RAdminSection>
-            {children}
+          {children}
         </RAdminSection>
     </>
   )

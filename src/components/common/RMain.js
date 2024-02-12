@@ -23,7 +23,7 @@ const Main = ({children}) => {
     }
 
     return (
-      <main className={`main_ ${currentRoute == '/' ? '' : 'inner_page'} ${conditionalPath[0] == 'admin' && 'dashboard_' }`}>
+      <main className={`main_ ${currentRoute == '/' ? '' : 'inner_page'} ${conditionalPath[0] == 'admin' ? 'dashboard_' : undefined}`}>
         <PageInnerBG />
         {children}
       </main>

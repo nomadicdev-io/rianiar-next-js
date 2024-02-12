@@ -1,7 +1,5 @@
-import adminStore from "@/store/adminStore"
-
 export const metadata = {
-  title: `${adminStore.pages.account.title} | ${adminStore.title}`,
+  title: 'App Settings | RianAir - Admin'
 }
 
 const AdminSettings = () => {

@@ -1,7 +1,5 @@
-import adminStore from "@/store/adminStore"
-
 export const metadata = {
-  title: `${adminStore.pages.socialMediaLinks.title} | ${adminStore.title}`,
+  title: 'Social Media Links | RianAir - Admin'
 }
 
 const AdminSocialMediaLinks = () => {

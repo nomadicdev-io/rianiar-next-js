@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image"
 import { useState } from "react"
 import FormLoader from "./FormLoader"
@@ -8,6 +10,7 @@ import { RInput } from "./FormComponents"
 import { useRouter } from 'next/navigation'
 import RModal from "../modal/RModal";
 import { AnimatePresence } from "framer-motion"
+import { account } from "@/app/appwrite"
 
 const LoginForm = ()=> {
 
@@ -22,8 +25,25 @@ const LoginForm = ()=> {
     });
 
     const onSubmit = async (data) => {
-        setLoader(true)
-        router.push('/admin', { scroll: true })
+        try{
+            setLoader(true)
+
+            const promise = await account.createEmailSession(data.email, data.password);
+            console.log(promise)
+            reset()
+            router.push('/admin', { scroll: true })
+            setLoader(false)
+
+        }catch(error){
+            setLoader(false)
+            setModal({
+                type: 'danger',
+                show: true,
+                title: 'Whoops!',
+                description: error.message
+            })
+        }
+        
     }
 
     return (
@@ -45,11 +65,11 @@ const LoginForm = ()=> {
                 <Controller
                     name="email"
                     control={control}
-                    rules={{ required: true }}
+                    rules={{ required: true, pattern:  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/ }}
                     render={({ field }) => (
                         <RInput 
                             title={'Email'}
-                            type={'text'}
+                            type={'email'}
                             controller={{...field}}
                             error={errors.email}
                         />

@@ -5,6 +5,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useState } from 'react';
 import { PiSignOutBold } from "react-icons/pi";
 import { useRouter } from 'next/navigation'
+import { account } from '@/app/appwrite';
 
 
 const AdminHeaderProfile = ()=> {
@@ -14,6 +15,15 @@ const AdminHeaderProfile = ()=> {
 
     const redirect = (value)=> {
         router.push(value, { scroll: true })
+    }
+
+    const logOut = async ()=> {
+        try{
+            const res = await account.deleteSession('current');
+            redirect('/login')
+        }catch(error){
+            console.log(error)
+        }
     }
 
     return (
@@ -46,7 +56,7 @@ const AdminHeaderProfile = ()=> {
                                 <button onClick={()=> redirect('/admin/settings')}><span>Settings</span></button>
                             </li>
                             <li>
-                                <button onClick={()=> redirect('/')}><span>Sign out</span><i><PiSignOutBold/></i></button>
+                                <button onClick={()=> logOut()}><span>Sign out</span><i><PiSignOutBold/></i></button>
                             </li>
                         </ul>
                     </div>

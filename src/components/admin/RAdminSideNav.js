@@ -58,7 +58,7 @@ const RAdminSideNav = () => {
                 {
                     menuItem.map((item, index)=> (
                         <li key={`topMenuItem${index}`}>
-                            <button onClick={()=> redirect(item.slug)} className={currentRoute == item.slug && 'active_'}><i>{item.icon}</i><span>{item.name}</span></button>
+                            <button onClick={()=> redirect(item.slug)} className={currentRoute == item.slug ? 'active_' : undefined}><i>{item.icon}</i><span>{item.name}</span></button>
                         </li>
                     ))
                 }
@@ -68,7 +68,7 @@ const RAdminSideNav = () => {
         <div className="r_admin_side_nav_top">
             <ul>
                 <li>
-                    <button onClick={()=> redirect('/admin/settings')} className={currentRoute == '/admin/settings' && 'active_'}><i><FiSettings /></i><span>Settings</span></button>
+                    <button onClick={()=> redirect('/admin/settings')} className={currentRoute == '/admin/settings' ? 'active_' : undefined}><i><FiSettings /></i><span>Settings</span></button>
                 </li>
             </ul>
         </div>

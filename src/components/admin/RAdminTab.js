@@ -1,23 +1,22 @@
+"use client"
 
-const RAdminTab = () => {
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+
+const RAdminTab = ({data}) => {
+
+    const currentPath = usePathname()
+
   return (
     <div className="r_admin_tab">
         <ul>
-            <li>
-                <button className="active_"><span>All Registraions</span></button>
-            </li>
-            <li>
-                <button><span>Latest</span></button>
-            </li>
-            <li>
-                <button><span>Viewed</span></button>
-            </li>
-            <li>
-                <button><span>Saved</span></button>
-            </li>
-            <li>
-                <button><span>Blacklisted</span></button>
-            </li>
+            {
+                data?.map((item, index)=> (
+                    <li key={`rChildSlug${index}`}>
+                        <Link className={currentPath == item.slug ? 'active_' : null} href={item.slug} title={item.title}>{item.title}</Link>
+                    </li>
+                ))
+            }
         </ul>
     </div>
   )

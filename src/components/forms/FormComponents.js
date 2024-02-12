@@ -11,7 +11,7 @@ import { getMonth, getYear } from "date-fns";
 export const RInput = ({title, type, controller, cssClass, error})=> {
     const id = useId();
     return (
-        <div className={`r_input_field ${cssClass} ${error && 'error_'}`}>
+        <div className={`r_input_field ${cssClass} ${error ? 'error_' :  undefined}`}>
             <label htmlFor={id} >{title}</label>
             <input type={type} {...controller} id={id}/>
         </div>
@@ -20,7 +20,7 @@ export const RInput = ({title, type, controller, cssClass, error})=> {
 
 export const RRadio = ({title, type, controller, cssClass, data, error})=> {
     return (
-        <div className={`r_input_field ${cssClass} ${error && 'error_'}`}>
+        <div className={`r_input_field ${cssClass} ${error ? 'error_' :  undefined}`}>
             <label>{title}</label>
             <div className='radio_group'>
 
@@ -43,7 +43,7 @@ export const RSelect = ({title, controller, cssClass, data, placeholder, isSearc
     const id = useId();
 
     return (
-        <div className={`r_input_field ${cssClass} ${error && 'error_'}`}>
+        <div className={`r_input_field ${cssClass} ${error ? 'error_' :  undefined}`}>
             <label htmlFor={id} >{title}</label>
             {
                 data ? (
@@ -68,7 +68,7 @@ export const RSelect = ({title, controller, cssClass, data, placeholder, isSearc
 export const RCheckbox = ({children, cssClass, controller, error})=> {
     const id = useId();
     return (
-        <div className={`r_input_field ${cssClass} ${error && 'error_'}`}>
+        <div className={`r_input_field ${cssClass} ${error ? 'error_' :  undefined}`}>
             <div className='r_checkbox'>
                 <input type='checkbox' id={id} {...controller}/>
                 <span><FaCheck /></span>
@@ -129,7 +129,7 @@ export const RDatepicker = ({title, controller, cssClass, customHeader, years, e
     )
 
     return (
-        <div className={`r_input_field ${cssClass} ${error && 'error_'}`}>
+        <div className={`r_input_field ${cssClass} ${error ? 'error_' :  undefined}`}>
             <label htmlFor={id} >{title}</label>
             <div className='datepicker_'>
                 <DatePicker 
@@ -148,7 +148,7 @@ export const RDatepicker = ({title, controller, cssClass, customHeader, years, e
 export const RTextArea = ({title, type, controller, cssClass, error})=> {
     const id = useId();
     return (
-        <div className={`r_input_field ${cssClass} ${error && 'error_'}`}>
+        <div className={`r_input_field ${cssClass} ${error ? 'error_' :  undefined}`}>
             <label htmlFor={id} >{title}</label>
             <textarea type={type} {...controller} id={id}/>
         </div>

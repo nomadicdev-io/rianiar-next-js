@@ -1,7 +1,5 @@
-import adminStore from "@/store/adminStore"
-
 export const metadata = {
-  title: `${adminStore.pages.questions.title} | ${adminStore.title}`,
+  title: 'Questions | RianAir - Admin'
 }
 
 const AdminQuestions = () => {

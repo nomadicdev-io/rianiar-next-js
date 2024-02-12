@@ -1,23 +1,22 @@
 import '@/components/admin/RAdmin.scss'
-import RAdminBody from '@/components/admin/RAdminBody';
 import RAdminSideNav from '@/components/admin/RAdminSideNav'
+import { getData } from '@/store/apiFunctions';
 import { atom } from 'jotai';
+import RAdminDataContext from '../api/RAdminDataContext';
+import RAdminBody from '@/components/admin/RAdminBody';
 
-export const adminContext = atom(null)
-
-async function getData() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin`)
-  return res.json()
-}
+export const adminContext = atom({routeParam: ''})
+export const activeContext = atom(null)
 
 const AdminLayout = async ({children}) => {
 
-  const data = await getData()
+  const data = await getData('/admin')
 
   return (
     <div className="r_admin_body">
+        <RAdminDataContext data={data} />
         <RAdminSideNav />
-        <RAdminBody data={data}>
+        <RAdminBody>
           {children}
         </RAdminBody>
     </div>

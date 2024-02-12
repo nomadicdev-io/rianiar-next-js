@@ -1,8 +1,9 @@
 const adminStore ={
     shortTitle: 'RianAir',
     title: 'RianAir-The Sky is Ours',
-    pages: {
-        dashboard: {
+    pages: [
+        {
+            key: 'dashboard',
             title: 'Dashboard',
             slug: '/admin',
             breadcrumb: [
@@ -12,8 +13,9 @@ const adminStore ={
                 }
              ]
         },
-        registrations: {
-            title: 'Registraion',
+        {
+            key: 'registrations',
+            title: 'Registraions',
             slug: '/admin/registrations',
             breadcrumb: [
                 {
@@ -27,28 +29,34 @@ const adminStore ={
             ],
             children: [
                 {
+                    key: 'all_registraions',
                     title: 'All Registration',
                     slug: '/admin/registrations'
                 },
                 {
+                    key: 'new_registraions',
                     title: 'New',
                     slug: '/admin/registrations/new'
                 },
                 {
+                    key: 'viewed_registraions',
                     title: 'Viewed',
                     slug: '/admin/registrations/viewed'
                 },
                 {
+                    key: 'saved_registraions',
                     title: 'Saved',
                     slug: '/admin/registrations/saved'
                 },
                 {
+                    key: 'blacklisted_registraions',
                     title: 'Blacklisted',
                     slug: '/admin/registrations/blacklisted'
                 }
             ]
         },
-        account: {
+        {
+            key: 'account',
             title: 'User Account',
             slug: '/admin/account',
             breadcrumb: [
@@ -62,7 +70,8 @@ const adminStore ={
                     }
             ]
         },
-        assistance: {
+        {
+            key: 'assistance',
             title: 'Assistance',
             slug: '/admin/assistance',
             breadcrumb: [
@@ -76,7 +85,8 @@ const adminStore ={
                     }
             ]
         },
-        programs: {
+        {
+            key: 'programs',
             title: 'Programs',
             slug: '/admin/programs',
             breadcrumb: [
@@ -90,7 +100,8 @@ const adminStore ={
                     }
             ]
         },
-        questions: {
+        {
+            key: 'questions',
             title: 'Questions',
             slug: '/admin/questions',
             breadcrumb: [
@@ -104,7 +115,8 @@ const adminStore ={
                     }
             ]
         },
-        settings: {
+        {
+            key: 'settings',
             title: 'App Settings',
             slug: '/admin/settings',
             breadcrumb: [
@@ -118,7 +130,8 @@ const adminStore ={
                     }
             ]
         },
-        socialMediaLinks: {
+        {
+            key: 'socialMediaLink',
             title: 'Social Media Links',
             slug: '/admin/social-links',
             breadcrumb: [
@@ -132,8 +145,7 @@ const adminStore ={
                     }
             ]
         }
-    }
-
+    ]
 }
 
-export default adminStore;
+export default adminStore; 

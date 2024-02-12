@@ -18,7 +18,7 @@ const RAdminBanner = ({breadcrumbData, children, title, greetings}) => {
             }
             <div className="r_admin_banner_wrapper">
                 {
-                    title &&  <RAdminPageTitle title={title} greetings={currentRoute == '/admin' && 1}/>
+                    title &&  <RAdminPageTitle title={title} greetings={currentRoute == '/admin'}/>
                 }
                 {children}
             </div>
