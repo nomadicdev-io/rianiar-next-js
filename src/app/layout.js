@@ -2,6 +2,7 @@ import PageLoader from '@/components/common/PageLoader';
 import RMain from '@/components/common/RMain';
 import Footer from '@/components/footer/Footer';
 import RHeader from '@/components/header/RHeader';
+import RModalController from '@/components/modal/RModalController';
 import '@/styles/app.scss';
 import { Gabarito } from 'next/font/google'
 
@@ -44,6 +45,8 @@ export default function RootLayout({ children }) {
           <RMain>{children}</RMain>
 
           <Footer />
+
+          <RModalController />
 
       </body>
     </html>

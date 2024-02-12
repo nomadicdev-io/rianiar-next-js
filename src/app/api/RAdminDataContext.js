@@ -9,9 +9,16 @@ const RAdminDataContext = ({data}) => {
     const [adminData, setAdminData] = useAtom(adminContext)
 
     useEffect(()=> {
+
+        const routeObj = {}
+        const setRoutes = data.pages.map(item=> {
+            routeObj[item.key] = item
+        })
+
         setAdminData({
             ...adminData,
-            data: data
+            data: data,
+            allRoutes: routeObj,
         })
     }, [])
 

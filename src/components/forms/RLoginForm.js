@@ -8,15 +8,15 @@ import { RButton, RButtonGroup } from "../buttons/Buttons"
 import { FaArrowRight } from "react-icons/fa6";
 import { RInput } from "./FormComponents"
 import { useRouter } from 'next/navigation'
-import RModal from "../modal/RModal";
-import { AnimatePresence } from "framer-motion"
 import { account } from "@/app/appwrite"
+import { useSetAtom } from "jotai"
+import { modalContext } from "../modal/RModalController"
 
 const LoginForm = ()=> {
 
     const router = useRouter()
     const [loader, setLoader] = useState(false)
-    const [modal, setModal] = useState({type: '', show: false, title: '', description: ''})
+    const setModal = useSetAtom(modalContext)
     const { reset, control, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
           email: '',
@@ -31,7 +31,7 @@ const LoginForm = ()=> {
             const promise = await account.createEmailSession(data.email, data.password);
             console.log(promise)
             reset()
-            router.push('/admin', { scroll: true })
+            //router.push('/admin', { scroll: true })
             setLoader(false)
 
         }catch(error){
@@ -104,20 +104,6 @@ const LoginForm = ()=> {
 
             {
                 loader && <FormLoader />
-            }
-
-            {
-                <AnimatePresence>
-                    {
-                        modal.show && 
-                        <RModal 
-                            type={modal.type}
-                            title={modal.title}
-                            description={modal.description}
-                            closeModal={()=> setModal({...modal, show: false})}
-                        />
-                    }
-                </AnimatePresence>
             }
             
         </div>

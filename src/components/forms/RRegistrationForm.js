@@ -13,8 +13,9 @@ import FormLoader from "./FormLoader";
 import { AnimatePresence } from "framer-motion";
 import { getAllCountries, educationdata, programsData } from "@/store";
 import SkeletonLoader from "../common/SkeletonLoader";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { countryArray } from "@/app/apply/page";
+import { modalContext } from "../modal/RModalController";
 
 const databases = new Databases(client);
 
@@ -31,7 +32,7 @@ const RRegistrationForm = () => {
         },
     });
     const [countries, setCountries] = useAtom(countryArray);
-    const [modal, setModal] = useState({type: '', show: false, title: '', description: ''})
+    const setModal = useSetAtom(modalContext)
     const [formLoader, setFormLoader] = useState(false)
     const [skeletonLoader, setSkeletonLoader] = useState(false)
 
@@ -277,20 +278,7 @@ const RRegistrationForm = () => {
                         formLoader && <FormLoader />
                     }
 
-                    {
-                        <AnimatePresence>
-                            {
-                                modal.show && 
-                                <RModal 
-                                    type={modal.type}
-                                    title={modal.title}
-                                    description={modal.description}
-                                    closeModal={()=> setModal({...modal, show: false})}
-                                />
-                            }
-                        </AnimatePresence>
-                    }
-
+                   
 
                 </form>
             }

@@ -17,10 +17,10 @@ const RAdminBody = ({children}) => {
 
     if(!resData?.data?.pages) return;
 
-    const resArray = resData?.data?.pages;
+    const routePath = currentPath.split('/')[2] ? currentPath.split('/')[2] : currentPath.split('/')[1]
+    const routeData = resData.allRoutes[routePath]
+    setPageData(routeData)
 
-    resArray.map(item=> item.slug == currentPath && setPageData(item))
-  
 
   }, [resData.data, currentPath])
 

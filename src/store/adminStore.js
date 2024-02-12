@@ -3,7 +3,7 @@ const adminStore ={
     title: 'RianAir-The Sky is Ours',
     pages: [
         {
-            key: 'dashboard',
+            key: 'admin',
             title: 'Dashboard',
             slug: '/admin',
             breadcrumb: [
@@ -131,7 +131,7 @@ const adminStore ={
             ]
         },
         {
-            key: 'socialMediaLink',
+            key: 'social-links',
             title: 'Social Media Links',
             slug: '/admin/social-links',
             breadcrumb: [

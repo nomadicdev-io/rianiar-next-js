@@ -16,13 +16,15 @@ import FormLoader from "../forms/FormLoader";
 import { useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { useSelectedLayoutSegments } from 'next/navigation'
+import { useSetAtom } from 'jotai'
+import { modalContext } from '../modal/RModalController'
 
 const databases = new Databases(client);
 
 const SubscribeNewsletter = ()=> {
 
     const { reset, register, handleSubmit, formState: { errors } } = useForm();
-    const [modal, setModal] = useState({type: '', show: false, title: '', description: ''})
+    const setModal = useSetAtom(modalContext)
     const [formLoader, setFormLoader] = useState(false)
 
     const onSubmit = async (data)=> {
@@ -81,19 +83,6 @@ const SubscribeNewsletter = ()=> {
                 formLoader && <FormLoader />
             }
 
-            {
-               <AnimatePresence>
-                {
-                    modal.show && 
-                    <RModal 
-                        type={modal.type}
-                        title={modal.title}
-                        description={modal.description}
-                        closeModal={()=> setModal({...modal, show: false})}
-                    />
-                }
-               </AnimatePresence>
-            }
         </div>
     )
 }
