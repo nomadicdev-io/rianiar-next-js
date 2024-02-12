@@ -131,9 +131,9 @@ const adminStore ={
             ]
         },
         {
-            key: 'social-links',
+            key: 'social',
             title: 'Social Media Links',
-            slug: '/admin/social-links',
+            slug: '/admin/social',
             breadcrumb: [
                 {
                     title: 'Dashboard',
@@ -141,7 +141,7 @@ const adminStore ={
                 },
                 {
                     title: 'Social Media Links',
-                    slug: '/admin/social-links'
+                    slug: '/admin/social'
                     }
             ]
         }

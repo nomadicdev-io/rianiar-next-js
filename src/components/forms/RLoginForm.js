@@ -2,7 +2,6 @@
 
 import Image from "next/image"
 import { useState } from "react"
-import FormLoader from "./FormLoader"
 import { useForm, Controller } from "react-hook-form"
 import { RButton, RButtonGroup } from "../buttons/Buttons"
 import { FaArrowRight } from "react-icons/fa6";
@@ -11,11 +10,12 @@ import { useRouter } from 'next/navigation'
 import { account } from "@/app/appwrite"
 import { useSetAtom } from "jotai"
 import { modalContext } from "../modal/RModalController"
+import { formLoaderContext } from "./FormLoaderController"
 
 const LoginForm = ()=> {
 
     const router = useRouter()
-    const [loader, setLoader] = useState(false)
+    const setLoader = useSetAtom(formLoaderContext)
     const setModal = useSetAtom(modalContext)
     const { reset, control, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
@@ -31,7 +31,7 @@ const LoginForm = ()=> {
             const promise = await account.createEmailSession(data.email, data.password);
             console.log(promise)
             reset()
-            //router.push('/admin', { scroll: true })
+            router.push('/admin', { scroll: true })
             setLoader(false)
 
         }catch(error){
@@ -101,10 +101,6 @@ const LoginForm = ()=> {
                 </RButtonGroup>
 
             </form>
-
-            {
-                loader && <FormLoader />
-            }
             
         </div>
     )

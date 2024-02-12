@@ -46,7 +46,7 @@ const RAdminSideNav = () => {
         },
         {
             name: 'Social Llinks',
-            slug: '/admin/social-links',
+            slug: '/admin/social',
             icon: <PiLinkSimpleHorizontalBold />
         }
     ]

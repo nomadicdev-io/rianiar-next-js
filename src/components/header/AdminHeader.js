@@ -6,12 +6,15 @@ import { useState } from 'react';
 import { PiSignOutBold } from "react-icons/pi";
 import { useRouter } from 'next/navigation'
 import { account } from '@/app/appwrite';
+import { useSetAtom } from 'jotai';
+import { formLoaderContext } from '../forms/FormLoaderController';
 
 
 const AdminHeaderProfile = ()=> {
 
     const [isVisible, setIsVisible] = useState(false)
     const router = useRouter()
+    const setFormLoader = useSetAtom(formLoaderContext)
 
     const redirect = (value)=> {
         router.push(value, { scroll: true })
@@ -19,10 +22,13 @@ const AdminHeaderProfile = ()=> {
 
     const logOut = async ()=> {
         try{
+            setFormLoader(true)
             const res = await account.deleteSession('current');
             redirect('/login')
+            setFormLoader(false)
         }catch(error){
             console.log(error)
+            setFormLoader(false)
         }
     }
 

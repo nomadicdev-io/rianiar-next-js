@@ -6,18 +6,13 @@ import { RButton, RButtonGroup } from "../buttons/Buttons"
 import { FaCheck } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import RModal from "../modal/RModal";
-import { client, db_collection } from "@/app/appwrite";
-import { Databases, ID } from "appwrite";
-import FormLoader from "./FormLoader";
-import { AnimatePresence } from "framer-motion";
+import { ID, databeses, db_collection } from "@/app/appwrite";
 import { getAllCountries, educationdata, programsData } from "@/store";
 import SkeletonLoader from "../common/SkeletonLoader";
 import { useAtom, useSetAtom } from "jotai";
 import { countryArray } from "@/app/apply/page";
 import { modalContext } from "../modal/RModalController";
-
-const databases = new Databases(client);
+import { formLoaderContext } from "./FormLoaderController";
 
 const RRegistrationForm = () => {
 
@@ -33,7 +28,7 @@ const RRegistrationForm = () => {
     });
     const [countries, setCountries] = useAtom(countryArray);
     const setModal = useSetAtom(modalContext)
-    const [formLoader, setFormLoader] = useState(false)
+    const setFormLoader = useSetAtom(formLoaderContext)
     const [skeletonLoader, setSkeletonLoader] = useState(false)
 
     const years = (new Array(2008 - 1984 + 1)).fill(undefined).map((_, i) => i + 1984)
@@ -63,7 +58,7 @@ const RRegistrationForm = () => {
                 age: Math.floor((new Date() - new Date(data.dob).getTime()) / 3.15576e+10),
             }
 
-            const res = await databases.createDocument(
+            const res = await databeses.createDocument(
                 process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
                 db_collection.registration,
                 ID.unique(),
@@ -273,12 +268,6 @@ const RRegistrationForm = () => {
                             icon={<FaCheck />}
                         />
                     </RButtonGroup>
-
-                    {
-                        formLoader && <FormLoader />
-                    }
-
-                   
 
                 </form>
             }

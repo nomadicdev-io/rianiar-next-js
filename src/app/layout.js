@@ -1,6 +1,7 @@
 import PageLoader from '@/components/common/PageLoader';
 import RMain from '@/components/common/RMain';
 import Footer from '@/components/footer/Footer';
+import { FormLoaderController } from '@/components/forms/FormLoaderController';
 import RHeader from '@/components/header/RHeader';
 import RModalController from '@/components/modal/RModalController';
 import '@/styles/app.scss';
@@ -47,7 +48,7 @@ export default function RootLayout({ children }) {
           <Footer />
 
           <RModalController />
-
+          <FormLoaderController />
       </body>
     </html>
   )

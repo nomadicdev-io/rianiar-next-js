@@ -9,15 +9,12 @@ import { FaWhatsapp, FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/
 import { FaXTwitter } from "react-icons/fa6";
 import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import { useForm } from "react-hook-form"
-import RModal from "../modal/RModal";
 import { client, db_collection } from "@/app/appwrite";
 import { Databases, ID } from "appwrite";
-import FormLoader from "../forms/FormLoader";
-import { useState } from 'react'
-import { AnimatePresence } from 'framer-motion'
 import { useSelectedLayoutSegments } from 'next/navigation'
 import { useSetAtom } from 'jotai'
 import { modalContext } from '../modal/RModalController'
+import { formLoaderContext } from '../forms/FormLoaderController'
 
 const databases = new Databases(client);
 
@@ -25,7 +22,7 @@ const SubscribeNewsletter = ()=> {
 
     const { reset, register, handleSubmit, formState: { errors } } = useForm();
     const setModal = useSetAtom(modalContext)
-    const [formLoader, setFormLoader] = useState(false)
+    const setFormLoader = useSetAtom(formLoaderContext)
 
     const onSubmit = async (data)=> {
         try{
@@ -78,10 +75,6 @@ const SubscribeNewsletter = ()=> {
                     <FaRegPaperPlane />
                 </button>
             </form>
-
-            {
-                formLoader && <FormLoader />
-            }
 
         </div>
     )
